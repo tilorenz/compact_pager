@@ -24,31 +24,13 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
-import org.kde.plasma.activityswitcher 1.0 as ActivitySwitcher
 
-Rectangle {
+Item{
 	id: root
-	
-	property bool isActivityPager: (plasmoid.pluginName === "sap")
-	
-	color: PlasmaCore.Theme.backgroundColor
-	border.color: PlasmaCore.Theme.textColor
-	border.width: 1
-	radius: 5
-	
-	Layout.minimumHeight: mainLbl.implicitHeight
-	Layout.minimumWidth: mainLbl.implicitWidth
-	
-//	Layout.preferredHeight: Math.max(Layout.minimumHeight, units.gridUnit)
-//	Layout.preferredWidth: Math.max(Layout.minimumWidth, units.gridUnit)
-	
-	
-	Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+	Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 	Plasmoid.status: pagerModel.shouldShowPager ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
 	
 	property int wheelDelta: 0
-	
-	//anchors.fill: parent
 	
 	function colorWithAlpha(color, alpha) {
 		return Qt.rgba(color.r, color.g, color.b, alpha)
@@ -66,54 +48,110 @@ Rectangle {
 		KQuickControlsAddonsComponents.KCMShell.openSystemSettings("kcm_kwin_virtualdesktops");
 	}
 	
-	function action_showActivityManager() {
-		ActivitySwitcher.Backend.toggleActivityManager()
-	}
-	
-	PlasmaComponents.Label{
-		id: mainLbl
-		anchors.centerIn: parent
-		color: PlasmaCore.Theme.textColor
-		text: isActivityPager ? pagerModel.TasksModel.activity : pagerModel.currentPage		
-	}
-	
-	MouseArea{
-		anchors.fill: parent
+	function switchDesktop(wheel){
+//		console.log("angleDelta y: ", wheel.angleDelta.y, " x: ", wheel.angleDelta.x)
+//		console.log("current page: ", pagerModel.currentPage, " count: ", pagerModel.count)
 		
-		onWheel: {
-			console.log("angleDelta y: ", wheel.angleDelta.y, " x: ", wheel.angleDelta.x)
-			console.log("current page: ", pagerModel.currentPage, " count: ", pagerModel.count)
-
-			// Magic number 120 for common "one click, see:
-			// https://doc.qt.io/qt-5/qml-qtquick-wheelevent.html#angleDelta-prop
-			wheelDelta += wheel.angleDelta.y || wheel.angleDelta.x;
+		// Magic number 120 for common "one click, see:
+		// https://doc.qt.io/qt-5/qml-qtquick-wheelevent.html#angleDelta-prop
+		wheelDelta += wheel.angleDelta.y || wheel.angleDelta.x;
 		
-			var increment = 0;
+		var increment = 0;
 		
-			while (wheelDelta >= 120) {
-				wheelDelta -= 120;
-				increment++;
+		while (wheelDelta >= 120) {
+			wheelDelta -= 120;
+			increment++;
+		}
+		
+		while (wheelDelta <= -120) {
+			wheelDelta += 120;
+			increment--;
+		}
+		
+		while (increment !== 0) {
+			if (increment < 0) {
+				var nextPage = plasmoid.configuration.wrapPage?
+							(pagerModel.currentPage + 1) % pagerModel.count :
+							Math.min(pagerModel.currentPage + 1, pagerModel.count - 1);
+				pagerModel.changePage(nextPage);
+			} else {
+				var previousPage = plasmoid.configuration.wrapPage ?
+							(pagerModel.count + pagerModel.currentPage - 1) % pagerModel.count :
+							Math.max(pagerModel.currentPage - 1, 0);
+				pagerModel.changePage(previousPage);
 			}
-		
-			while (wheelDelta <= -120) {
-				wheelDelta += 120;
-				increment--;
-			}
-		
-			while (increment !== 0) {
-				if (increment < 0) {
-					var nextPage = plasmoid.configuration.wrapPage?
-								(pagerModel.currentPage + 1) % pagerModel.count :
-								Math.min(pagerModel.currentPage + 1, pagerModel.count - 1);
-					pagerModel.changePage(nextPage);
-				} else {
-					var previousPage = plasmoid.configuration.wrapPage ?
-								(pagerModel.count + pagerModel.currentPage - 1) % pagerModel.count :
-								Math.max(pagerModel.currentPage - 1, 0);
-					pagerModel.changePage(previousPage);
-				}
 			
-				increment += (increment < 0) ? 1 : -1;
+			increment += (increment < 0) ? 1 : -1;
+		}
+	}
+	
+	
+	Plasmoid.compactRepresentation: Item{
+		Loader{
+			id: compLoader
+			anchors.fill: parent
+			sourceComponent: numberBox
+		}
+		
+		Binding{
+			target: compLoader.item
+			property: "text"
+			value: pagerModel.currentPage + 1
+		}
+		
+		MouseArea{
+			anchors.fill: parent
+			
+			onClicked: plasmoid.expanded = ! plasmoid.expanded
+			onWheel: switchDesktop(wheel)
+		}
+	}
+	
+	
+	Plasmoid.fullRepresentation: Item{
+		Loader{
+			id: fullLoader
+			anchors.fill: parent
+			sourceComponent: numberBox
+		}
+		
+		Binding{
+			target: compLoader.item
+			property: "text"
+			value: pagerModel.currentPage + 1
+		}
+		
+		MouseArea{
+			anchors.fill: parent
+			
+			onWheel: switchDesktop(wheel)
+		}
+	}
+	
+	
+	Component{
+		id: numberBox
+		
+		Rectangle {			
+			color: PlasmaCore.Theme.backgroundColor
+			border.color: PlasmaCore.Theme.textColor
+			border.width: 1
+			radius: 5
+			
+			//			Layout.minimumHeight: numberLbl.implicitHeight + 4
+			//			Layout.minimumWidth: numberLbl.implicitWidth + 4
+			
+			//+4 for borders and margins on both sides
+			Layout.preferredHeight: numberLbl.implicitHeight + 4
+			Layout.preferredWidth: numberLbl.implicitWidth + 4
+			
+			property alias text: numberLbl.text 
+			
+			PlasmaComponents.Label{
+				id: numberLbl
+				anchors.centerIn: parent
+				color: PlasmaCore.Theme.textColor
+				text: pagerModel.currentPage + 1
 			}
 		}
 	}
@@ -122,29 +160,25 @@ Rectangle {
 	PagerModel {
 		id: pagerModel
 		
-		enabled: root.visible
+		enabled: true
 		
 		showDesktop: (plasmoid.configuration.currentDesktopSelected === 1)
 		
 		showOnlyCurrentScreen: plasmoid.configuration.showOnlyCurrentScreen
 		screenGeometry: plasmoid.screenGeometry
 		
-		pagerType: isActivityPager ? PagerModel.Activities : PagerModel.VirtualDesktops
+		pagerType: PagerModel.VirtualDesktops
 	}
 	
 	Component.onCompleted: {
-		if (isActivityPager) {
-			plasmoid.setAction("showActivityManager", i18n("Show Activity Manager..."), "activities");
-		} else {
-			if (KQuickControlsAddonsComponents.KCMShell.authorize("kcm_kwin_virtualdesktops.desktop").length > 0) {
-				plasmoid.setAction("addDesktop", i18n("Add Virtual Desktop"), "list-add");
-				plasmoid.setAction("removeDesktop", i18n("Remove Virtual Desktop"), "list-remove");
-				plasmoid.action("removeDesktop").enabled = Qt.binding(function() {
-					return pagerModel.count > 1;
-				});
-				
-				plasmoid.setAction("openKCM", i18n("Configure Virtual Desktops..."), "configure");
-			}
+		if (KQuickControlsAddonsComponents.KCMShell.authorize("kcm_kwin_virtualdesktops.desktop").length > 0) {
+			plasmoid.setAction("addDesktop", i18n("Add Virtual Desktop"), "list-add");
+			plasmoid.setAction("removeDesktop", i18n("Remove Virtual Desktop"), "list-remove");
+			plasmoid.action("removeDesktop").enabled = Qt.binding(function() {
+				return pagerModel.count > 1;
+			});
+			
+			plasmoid.setAction("openKCM", i18n("Configure Virtual Desktops..."), "configure");
 		}
 	}
 }
