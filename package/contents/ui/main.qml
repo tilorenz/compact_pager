@@ -106,7 +106,7 @@ Item{
 			radius: 5
 			
 			implicitHeight: numberLbl.implicitHeight
-			implicitWidth: numberLbl.implicitWidth
+			implicitWidth: Math.max(numberLbl.implicitWidth + 4, implicitHeight)
 			
 			
 			//			Layout.minimumHeight: numberLbl.implicitHeight + 4

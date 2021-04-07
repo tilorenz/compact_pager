@@ -7,42 +7,31 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
 
-Item{
-//	Rectangle{
-//		id: sizeHelper
-//		visible: false
-//		anchors.fill: parent
-		
-//	}
+RowLayout{
+	id: root
 	
-//	PlasmaComponents.Label{
-//		id: sizeLbl
-//		visible: false
-//	}
 	
 	Loader{
 		id: compLoader
-		x: 0
-		y: (sizeHelper.height * 0.8 > PlasmaCore.Theme.defaultFont.pixelSize + 4) ? sizeHelper.height * 0.1 : 0
-		height: Math.max(sizeHelper.height * 0.8, PlasmaCore.Theme.defaultFont.pixelSize + 4)
-		width: sizeHelper.width
-		property int _minWidth: pagerModel.currentPage >= 9 ? 2 * PlasmaCore.Units.gridUnit + 4 : PlasmaCore.Units.gridUnit + 4 
+		sourceComponent: numberBox
+		Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 		
-		sourceComponent: numberBox	
+		
 	}
-	
-	Binding{
-		target: compLoader.item
-		property: "text"
-		value: pagerModel.currentPage + 1
-	}
-	
 	MouseArea{
 		anchors.fill: parent
 		
 		onClicked: plasmoid.expanded = ! plasmoid.expanded
 		onWheel: switchDesktop(wheel)
 	}
+	
+	Binding{
+		target: compLoader.item
+		property: "text"
+		value: pagerModel.currentPage === 1 ? 10 : pagerModel.currentPage + 1
+	}
+	
+	
 	
 	states: [
 		State {
@@ -51,15 +40,11 @@ Item{
 			
 			PropertyChanges {
 				target: compLoader
-				x: 0
-				y: (sizeHelper.height * 0.8 > PlasmaCore.Theme.defaultFont.pixelSize + 4) ? sizeHelper.height * 0.1 : 0
-				height: Math.max(sizeHelper.height * 0.8, PlasmaCore.Theme.defaultFont.pixelSize + 4)
-				width: sizeHelper.width
+				Layout.topMargin: height * .8 >= item.implicitHeight + 4 ? height * 0.1 : 0
+				Layout.bottomMargin: height * .8 >= item.implicitHeight + 4 ? height * 0.1 : 0
+				Layout.leftMargin: 0
+				Layout.rightMargin: 0
 			}
-//			PropertyChanges{
-//				target: sizeHelper
-				
-//			}
 		},
 		
 		State {
@@ -68,10 +53,10 @@ Item{
 			
 			PropertyChanges {
 				target: compLoader
-				x: (sizeHelper.width * 0.8 > _minWidth) ? sizeHelper.width * 0.1 : 0
-				y: 0
-				height: sizeHelper.height
-				width: Math.max(sizeHelper.width * 0.8, _minWidth)
+				Layout.topMargin: 0
+				Layout.bottomMargin: 0
+				Layout.leftMargin: width * .8 >= item.implicitWidth + 4 ? width * 0.1 : 0
+				Layout.rightMargin: width * .8 >= item.implicitWidth + 4 ? width * 0.1 : 0
 			}
 		},
 		
@@ -81,10 +66,14 @@ Item{
 			
 			PropertyChanges {
 				target: compLoader
-				x: 0
-				y: 0
-				height: sizeHelper.height
-				width: sizeHelper.width
+				Layout.topMargin: 0
+				Layout.bottomMargin: 0
+				Layout.leftMargin: 0
+				Layout.rightMargin: 0
+				Layout.fillHeight: true
+				Layout.fillWidth: true
+				Layout.preferredHeight: root.height
+				Layout.preferredWidth: root.width
 			}
 		}
 	]
