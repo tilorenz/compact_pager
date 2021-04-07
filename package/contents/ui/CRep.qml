@@ -8,16 +8,17 @@ import org.kde.plasma.private.pager 2.0
 
 
 Item{
-	Rectangle{
-		id: sizeHelper
-		visible: false
-		anchors.fill: parent
-	}
+//	Rectangle{
+//		id: sizeHelper
+//		visible: false
+//		anchors.fill: parent
+		
+//	}
 	
-	PlasmaComponents.Label{
-		id: sizeLbl
-		visible: false
-	}
+//	PlasmaComponents.Label{
+//		id: sizeLbl
+//		visible: false
+//	}
 	
 	Loader{
 		id: compLoader
@@ -54,8 +55,11 @@ Item{
 				y: (sizeHelper.height * 0.8 > PlasmaCore.Theme.defaultFont.pixelSize + 4) ? sizeHelper.height * 0.1 : 0
 				height: Math.max(sizeHelper.height * 0.8, PlasmaCore.Theme.defaultFont.pixelSize + 4)
 				width: sizeHelper.width
-				color: "blue"
 			}
+//			PropertyChanges{
+//				target: sizeHelper
+				
+//			}
 		},
 		
 		State {
@@ -68,7 +72,6 @@ Item{
 				y: 0
 				height: sizeHelper.height
 				width: Math.max(sizeHelper.width * 0.8, _minWidth)
-				color: "yellow"
 			}
 		},
 		

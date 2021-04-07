@@ -91,25 +91,7 @@ Item{
 	Plasmoid.compactRepresentation: CRep { }
 	
 	
-	Plasmoid.fullRepresentation: Item{
-		Loader{
-			id: fullLoader
-			anchors.fill: parent
-			//			Layout.preferredHeight: item.preferredHeight
-			sourceComponent: numberBox
-		}
-		
-		Binding{
-			target: fullLoader.item
-			property: "text"
-			value: pagerModel.currentPage + 1
-		}
-		
-		MouseArea{
-			anchors.fill: parent
-			onWheel: switchDesktop(wheel)
-		}
-	}
+	Plasmoid.fullRepresentation: FRep { }
 	
 	
 	
@@ -117,11 +99,15 @@ Item{
 	Component{
 		id: numberBox
 		
-		Rectangle {			
+		Rectangle {
 			color: PlasmaCore.Theme.backgroundColor
 			border.color: PlasmaCore.Theme.textColor
 			border.width: 1
 			radius: 5
+			
+			implicitHeight: numberLbl.implicitHeight
+			implicitWidth: numberLbl.implicitWidth
+			
 			
 			//			Layout.minimumHeight: numberLbl.implicitHeight + 4
 			//			Layout.minimumWidth: numberLbl.implicitWidth + 4
