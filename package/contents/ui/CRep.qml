@@ -12,22 +12,18 @@ Item{
 	RowLayout{
 		anchors.fill: parent
 		
-		
 		Loader{
 			id: compLoader
 			sourceComponent: NumberBox { }
 			Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-			
-			
 		}
 		
 		
 		Binding{
 			target: compLoader.item
 			property: "text"
-			value: pagerModel.currentPage === 1 ? 10 : pagerModel.currentPage + 1
+			value: pagerModel.currentPage + 1
 		}
-		
 		
 		
 		states: [
@@ -75,6 +71,7 @@ Item{
 			}
 		]
 	}
+	
 	MouseArea{
 		anchors.fill: parent
 		

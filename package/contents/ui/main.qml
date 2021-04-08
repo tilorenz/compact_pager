@@ -27,7 +27,10 @@ import org.kde.plasma.private.pager 2.0
 
 Item{
 	id: root
-	Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+	Plasmoid.switchHeight: pagerModel.layoutRows * PlasmaCore.Units.gridUnit
+	Plasmoid.switchWidth: Math.ceil(pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
+	
+
 	Plasmoid.status: pagerModel.shouldShowPager ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
 	
 	property int wheelDelta: 0
@@ -86,52 +89,15 @@ Item{
 	}
 	
 	
-	
-	
 	Plasmoid.compactRepresentation: CRep { }
-	
 	
 	Plasmoid.fullRepresentation: FRep { }
 	
 	
-/*	
-	
-	Component{
-		id: numberBox
-		
-		Rectangle {
-			color: PlasmaCore.Theme.backgroundColor
-			border.color: PlasmaCore.Theme.textColor
-			border.width: 1
-			radius: 5
-			
-			implicitHeight: numberLbl.implicitHeight
-			implicitWidth: Math.max(numberLbl.implicitWidth + 4, implicitHeight)
-			
-			
-			//			Layout.minimumHeight: numberLbl.implicitHeight + 4
-			//			Layout.minimumWidth: numberLbl.implicitWidth + 4
-			
-			//+4 for borders and margins on both sides
-			//			Layout.preferredHeight: numberLbl.implicitHeight + 4
-			//			Layout.preferredWidth: numberLbl.implicitWidth + 4
-			
-			property alias text: numberLbl.text 
-			
-			PlasmaComponents.Label{
-				id: numberLbl
-				anchors.centerIn: parent
-				color: PlasmaCore.Theme.textColor
-				text: pagerModel.currentPage + 1
-			}
-		}
-	}
-	*/
-	
 	PagerModel {
 		id: pagerModel
 		
-		enabled: true
+		enabled: root.visible
 		
 		showDesktop: (plasmoid.configuration.currentDesktopSelected === 1)
 		

@@ -15,7 +15,13 @@ GridLayout{
 		model: pagerModel
 		NumberBox{
 			id: nBox
-			text: model.index + 1
+			text: index + 1
+			
+			Layout.fillHeight: true
+			Layout.fillWidth: true
+			
+			//highlight the current desktop
+			border.color: index === pagerModel.currentPage ? PlasmaCore.Theme.highlightColor : PlasmaCore.Theme.textColor
 			
 			MouseArea{
 				anchors.fill: parent
@@ -26,5 +32,12 @@ GridLayout{
 				}
 			}
 		}
+	}
+	MouseArea{
+		width: parent.width
+		height: parent.height
+		onWheel: switchDesktop(wheel)
+		//let clicks through to the MouseAreas in the NumberBoxes
+		propagateComposedEvents: true
 	}
 }
