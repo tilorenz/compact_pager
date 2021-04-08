@@ -7,16 +7,73 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
 
-RowLayout{
+Item{
 	id: root
-	
-	
-	Loader{
-		id: compLoader
-		sourceComponent: numberBox
-		Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+	RowLayout{
+		anchors.fill: parent
 		
 		
+		Loader{
+			id: compLoader
+			sourceComponent: NumberBox { }
+			Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+			
+			
+		}
+		
+		
+		Binding{
+			target: compLoader.item
+			property: "text"
+			value: pagerModel.currentPage === 1 ? 10 : pagerModel.currentPage + 1
+		}
+		
+		
+		
+		states: [
+			State {
+				name: "horizontalPanel"
+				when: plasmoid.formFactor === PlasmaCore.Types.Horizontal
+				
+				PropertyChanges {
+					target: compLoader
+					Layout.topMargin: height * .8 >= item.implicitHeight + 4 ? height * 0.1 : 0
+					Layout.bottomMargin: height * .8 >= item.implicitHeight + 4 ? height * 0.1 : 0
+					Layout.leftMargin: 0
+					Layout.rightMargin: 0
+				}
+			},
+			
+			State {
+				name: "verticalPanel"
+				when: plasmoid.formFactor === PlasmaCore.Types.Vertical
+				
+				PropertyChanges {
+					target: compLoader
+					Layout.topMargin: 0
+					Layout.bottomMargin: 0
+					Layout.leftMargin: width * .8 >= item.implicitWidth + 4 ? width * 0.1 : 0
+					Layout.rightMargin: width * .8 >= item.implicitWidth + 4 ? width * 0.1 : 0
+				}
+			},
+			
+			State{
+				name: "other"
+				when: plasmoid.formFactor !== PlasmaCore.Types.Horizontal && plasmoid.formFactor !== PlasmaCore.Types.Vertical
+				
+				PropertyChanges {
+					target: compLoader
+					Layout.topMargin: 0
+					Layout.bottomMargin: 0
+					Layout.leftMargin: 0
+					Layout.rightMargin: 0
+					Layout.fillHeight: true
+					Layout.fillWidth: true
+					Layout.preferredHeight: root.height
+					Layout.preferredWidth: root.width
+				}
+			}
+		]
 	}
 	MouseArea{
 		anchors.fill: parent
@@ -24,57 +81,6 @@ RowLayout{
 		onClicked: plasmoid.expanded = ! plasmoid.expanded
 		onWheel: switchDesktop(wheel)
 	}
-	
-	Binding{
-		target: compLoader.item
-		property: "text"
-		value: pagerModel.currentPage === 1 ? 10 : pagerModel.currentPage + 1
-	}
-	
-	
-	
-	states: [
-		State {
-			name: "horizontalPanel"
-			when: plasmoid.formFactor === PlasmaCore.Types.Horizontal
-			
-			PropertyChanges {
-				target: compLoader
-				Layout.topMargin: height * .8 >= item.implicitHeight + 4 ? height * 0.1 : 0
-				Layout.bottomMargin: height * .8 >= item.implicitHeight + 4 ? height * 0.1 : 0
-				Layout.leftMargin: 0
-				Layout.rightMargin: 0
-			}
-		},
-		
-		State {
-			name: "verticalPanel"
-			when: plasmoid.formFactor === PlasmaCore.Types.Vertical
-			
-			PropertyChanges {
-				target: compLoader
-				Layout.topMargin: 0
-				Layout.bottomMargin: 0
-				Layout.leftMargin: width * .8 >= item.implicitWidth + 4 ? width * 0.1 : 0
-				Layout.rightMargin: width * .8 >= item.implicitWidth + 4 ? width * 0.1 : 0
-			}
-		},
-		
-		State{
-			name: "other"
-			when: plasmoid.formFactor !== PlasmaCore.Types.Horizontal && plasmoid.formFactor !== PlasmaCore.Types.Vertical
-			
-			PropertyChanges {
-				target: compLoader
-				Layout.topMargin: 0
-				Layout.bottomMargin: 0
-				Layout.leftMargin: 0
-				Layout.rightMargin: 0
-				Layout.fillHeight: true
-				Layout.fillWidth: true
-				Layout.preferredHeight: root.height
-				Layout.preferredWidth: root.width
-			}
-		}
-	]
 }
+
+

@@ -94,7 +94,7 @@ Item{
 	Plasmoid.fullRepresentation: FRep { }
 	
 	
-	
+/*	
 	
 	Component{
 		id: numberBox
@@ -126,7 +126,7 @@ Item{
 			}
 		}
 	}
-	
+	*/
 	
 	PagerModel {
 		id: pagerModel

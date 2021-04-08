@@ -6,22 +6,25 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
-Item{
-	Loader{
-		id: fullLoader
-		anchors.fill: parent
-		//			Layout.preferredHeight: item.preferredHeight
-		sourceComponent: numberBox
-	}
+GridLayout{
+	anchors.fill: parent
+	columns: Math.ceil(pagerModel.count / pagerModel.layoutRows)
 	
-	Binding{
-		target: fullLoader.item
-		property: "text"
-		value: pagerModel.currentPage + 1
-	}
-	
-	MouseArea{
-		anchors.fill: parent
-		onWheel: switchDesktop(wheel)
+	Repeater{
+		id: dRep
+		model: pagerModel
+		NumberBox{
+			id: nBox
+			text: model.index + 1
+			
+			MouseArea{
+				anchors.fill: parent
+				onClicked: {
+					pagerModel.changePage(model.index)
+					//TODO maybe add option for this
+					plasmoid.expanded = false
+				}
+			}
+		}
 	}
 }
