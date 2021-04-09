@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Smallpager
+Name=Compact Pager
 Name[af]=Pager
 Name[ast]=Paxinador
 Name[az]=İş Masası dəyişəni
@@ -164,9 +164,9 @@ X-Plasma-MainScript=ui/main.qml
 X-Plasma-Provides=org.kde.plasma.virtualdesktops
 X-KDE-PluginInfo-Author=Tino Lorenz
 X-KDE-PluginInfo-Email=tilrnz@gmx.net
-X-KDE-PluginInfo-Name=smallpager
+X-KDE-PluginInfo-Name=com.github.tilorenz.compact_pager
 X-KDE-PluginInfo-Version=4.0
-X-KDE-PluginInfo-Website=https://userbase.kde.org/Plasma/Pager
+X-KDE-PluginInfo-Website=https://github.com/tilorenz/compact_pager
 X-KDE-PluginInfo-Category=Windows and Tasks
 X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-PluginInfo-EnabledByDefault=true
