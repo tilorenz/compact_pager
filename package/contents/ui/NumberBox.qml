@@ -23,41 +23,21 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
-GridLayout{
-	anchors.fill: parent
-	columns: Math.ceil(pagerModel.count / pagerModel.layoutRows)
+Rectangle {
+	color: PlasmaCore.Theme.backgroundColor
+	border.color: PlasmaCore.Theme.textColor
+	border.width: 1
+	radius: 5
 	
-	Repeater{
-		id: dRep
-		model: pagerModel
-		NumberBox{
-			id: nBox
-			text: index + 1
-			
-			Layout.fillHeight: true
-			Layout.fillWidth: true
-			//make the popup a little larger
-			Layout.preferredHeight: implicitHeight * 3
-			Layout.preferredWidth: implicitWidth * 3
-			
-			//highlight the current desktop
-			border.color: index === pagerModel.currentPage ? PlasmaCore.Theme.highlightColor : PlasmaCore.Theme.textColor
-			
-			MouseArea{
-				anchors.fill: parent
-				onClicked: {
-					pagerModel.changePage(model.index)
-					//TODO maybe add option for this
-					plasmoid.expanded = false
-				}
-			}
-		}
-	}
-	MouseArea{
-		width: parent.width
-		height: parent.height
-		onWheel: switchDesktop(wheel)
-		//let clicks through to the MouseAreas in the NumberBoxes
-		propagateComposedEvents: true
+	implicitHeight: numberLbl.implicitHeight
+	implicitWidth: Math.max(numberLbl.implicitWidth + 4, implicitHeight)
+	
+	property alias text: numberLbl.text 
+	
+	PlasmaComponents.Label{
+		id: numberLbl
+		anchors.centerIn: parent
+		color: PlasmaCore.Theme.textColor
+		text: pagerModel.currentPage + 1
 	}
 }
