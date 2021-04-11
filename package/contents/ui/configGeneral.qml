@@ -19,13 +19,11 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 2.5 as QtControls
-import QtQuick.Controls.Styles 1.0
 
 import org.kde.kirigami 2.5 as Kirigami
 
 
 Kirigami.FormLayout {
-	
 	anchors.left: parent.left
 	anchors.right: parent.right
 	
@@ -37,7 +35,6 @@ Kirigami.FormLayout {
 		id: wrapPage
 		text: i18n("Navigation wraps around")
 	}
-	
 	
 	Item {
 		Kirigami.FormData.isSection: true
@@ -62,14 +59,12 @@ Kirigami.FormLayout {
 		model: ["Adaptive", "Full", "Compact"]
 	}
 	
-	
 	Item {
 		Kirigami.FormData.isSection: true
 	}
 	
 	QtControls.ComboBox {
 		id: currentDesktopSelectedBox
-		
 		Kirigami.FormData.label: i18n("Selecting current virtual desktop:")
 		
 		model: ["Does nothing", "Shows the desktop"]

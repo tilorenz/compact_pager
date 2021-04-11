@@ -29,15 +29,9 @@ import org.kde.plasma.private.pager 2.0
 Item{
 	id: root
 	Plasmoid.switchHeight: switch(plasmoid.configuration.forceLayout){
-						   case 0: 
-							   console.log("pager 0")
-							   return pagerModel.layoutRows * PlasmaCore.Units.gridUnit
-						   case 1: 
-							   console.log("pager 1")
-							   return 0.1 * PlasmaCore.Units.gridUnit //full
-						   case 2: 
-							   console.log("pager 2")
-							   return 500 * PlasmaCore.Units.gridUnit //compact
+						   case 0: return pagerModel.layoutRows * PlasmaCore.Units.gridUnit
+						   case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
+						   case 2: return 500 * PlasmaCore.Units.gridUnit //compact
 						   }
 		
 	Plasmoid.switchWidth: switch(plasmoid.configuration.forceLayout){
@@ -46,14 +40,9 @@ Item{
 					      case 2: return 500 * PlasmaCore.Units.gridUnit //compact
 					      }
 	
-
 	Plasmoid.status: pagerModel.shouldShowPager ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
 	
 	property int wheelDelta: 0
-	
-	function colorWithAlpha(color, alpha) {
-		return Qt.rgba(color.r, color.g, color.b, alpha)
-	}
 	
 	function action_addDesktop() {
 		pagerModel.addDesktop();
@@ -68,9 +57,6 @@ Item{
 	}
 	
 	function switchDesktop(wheel){
-		//		console.log("angleDelta y: ", wheel.angleDelta.y, " x: ", wheel.angleDelta.x)
-		//		console.log("current page: ", pagerModel.currentPage, " count: ", pagerModel.count)
-		
 		// Magic number 120 for common "one click, see:
 		// https://doc.qt.io/qt-5/qml-qtquick-wheelevent.html#angleDelta-prop
 		wheelDelta += wheel.angleDelta.y || wheel.angleDelta.x;
