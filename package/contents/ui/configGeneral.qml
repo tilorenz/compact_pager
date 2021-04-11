@@ -19,6 +19,7 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 2.5 as QtControls
+import QtQuick.Controls.Styles 1.0
 
 import org.kde.kirigami 2.5 as Kirigami
 
@@ -48,11 +49,15 @@ Kirigami.FormLayout {
 		
 		Kirigami.FormData.label: i18n("Layout:")
 		
-//		QtControls.ToolTip.delay: 1000
-//		QtControls.ToolTip.timeout: 5000
-//		QtControls.ToolTip.visible: hovered
-//		QtControls.ToolTip.text: qsTr("test")
-		
+		//TODO find a way to have the ToolTip on the elements instead of the Box. This is ugly & unintuitive.
+		QtControls.ToolTip.delay: 1000
+		QtControls.ToolTip.timeout: 5000
+		QtControls.ToolTip.visible: hovered
+		QtControls.ToolTip.text: switch(currentIndex){
+								 case 0: return "Switch the layout depending on available space."
+								 case 1: return "Always show full layout. Warning: looks broken if not enough space is available."
+								 case 2: return "Always show compact layout."
+								 }
 		
 		model: ["Adaptive", "Full", "Compact"]
 	}
@@ -69,5 +74,4 @@ Kirigami.FormLayout {
 		
 		model: ["Does nothing", "Shows the desktop"]
 	}
-
 }

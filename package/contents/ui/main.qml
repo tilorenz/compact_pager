@@ -28,8 +28,23 @@ import org.kde.plasma.private.pager 2.0
 
 Item{
 	id: root
-	Plasmoid.switchHeight: pagerModel.layoutRows * PlasmaCore.Units.gridUnit
-	Plasmoid.switchWidth: Math.ceil(pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
+	Plasmoid.switchHeight: switch(plasmoid.configuration.forceLayout){
+						   case 0: 
+							   console.log("pager 0")
+							   return pagerModel.layoutRows * PlasmaCore.Units.gridUnit
+						   case 1: 
+							   console.log("pager 1")
+							   return 0.1 * PlasmaCore.Units.gridUnit //full
+						   case 2: 
+							   console.log("pager 2")
+							   return 500 * PlasmaCore.Units.gridUnit //compact
+						   }
+		
+	Plasmoid.switchWidth: switch(plasmoid.configuration.forceLayout){
+						  case 0: return Math.ceil(pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
+					      case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
+					      case 2: return 500 * PlasmaCore.Units.gridUnit //compact
+					      }
 	
 
 	Plasmoid.status: pagerModel.shouldShowPager ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
@@ -77,12 +92,14 @@ Item{
 				var nextPage = plasmoid.configuration.wrapPage?
 							(pagerModel.currentPage + 1) % pagerModel.count :
 							Math.min(pagerModel.currentPage + 1, pagerModel.count - 1);
-				pagerModel.changePage(nextPage);
+				if(nextPage !== pagerModel.currentPage)
+					pagerModel.changePage(nextPage);
 			} else {
 				var previousPage = plasmoid.configuration.wrapPage ?
 							(pagerModel.count + pagerModel.currentPage - 1) % pagerModel.count :
 							Math.max(pagerModel.currentPage - 1, 0);
-				pagerModel.changePage(previousPage);
+				if(previousPage !== pagerModel.currentPage)
+					pagerModel.changePage(previousPage);
 			}
 			
 			increment += (increment < 0) ? 1 : -1;
@@ -102,7 +119,7 @@ Item{
 		
 		showDesktop: (plasmoid.configuration.currentDesktopSelected === 1)
 		
-		showOnlyCurrentScreen: plasmoid.configuration.showOnlyCurrentScreen
+		showOnlyCurrentScreen: false
 		screenGeometry: plasmoid.screenGeometry
 		
 		pagerType: PagerModel.VirtualDesktops
