@@ -26,6 +26,8 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
+import "lib"
+
 Item{
 	id: root
 	Plasmoid.switchHeight: switch(plasmoid.configuration.forceLayout){
