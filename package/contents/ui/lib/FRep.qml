@@ -44,9 +44,9 @@ GridLayout {
 	property color borderColorHighlight: plasmoid.configuration.borderColor 
 	// Dim borders of all but current desktop
 	property color borderColor: Qt.rgba(
-		Math.max(0, borderColorHighlight.r - 0.6),
-		Math.max(0, borderColorHighlight.g - 0.6),
-		Math.max(0, borderColorHighlight.b - 0.6),
+		Math.max(0, borderColorHighlight.r - 0.4),
+		Math.max(0, borderColorHighlight.g - 0.4),
+		Math.max(0, borderColorHighlight.b - 0.4),
 		borderColorHighlight.a
 	)
 
