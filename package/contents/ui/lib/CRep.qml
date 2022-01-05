@@ -24,17 +24,32 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
 
-Item{
+Item {
 	id: root
+	// Fill parent while enforcing the item to be square
+	property double isVertical: parent.height > parent.width
+	width: isVertical ? parent.height : parent.width
+	height: width
+
 	RowLayout{
+		id: rootLayout
 		anchors.fill: parent
-		
+
 		Loader{
 			id: compLoader
-			sourceComponent: NumberBox { }
-			Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+			sourceComponent: NumberBox {
+				color: plasmoid.configuration.bgColorChecked ?
+							Qt.rgba(plasmoid.configuration.bgColor.r,
+									plasmoid.configuration.bgColor.g,
+									plasmoid.configuration.bgColor.b,
+									plasmoid.configuration.bgOpacity / 100) : "transparent"
+				border.color: plasmoid.configuration.borderColor
+			}
+
+			Layout.preferredWidth: parent.width * 0.8
+			Layout.preferredHeight: Layout.preferredWidth
+			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 		}
-		
 		
 		Binding{
 			target: compLoader.item
@@ -88,11 +103,10 @@ Item{
 			}
 		]
 	}
-	
 	MouseArea{
 		anchors.fill: parent
 		
-		onClicked: plasmoid.expanded = ! plasmoid.expanded
+		onClicked: plasmoid.expanded = !plasmoid.expanded
 		onWheel: switchDesktop(wheel)
 	}
 }

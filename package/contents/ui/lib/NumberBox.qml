@@ -23,20 +23,23 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
 Rectangle {
-	color: PlasmaCore.Theme.backgroundColor
-	border.color: PlasmaCore.Theme.textColor
-	border.width: 1
-	radius: 5
+	property alias text: numberText.text 
+	property bool fontSizeChecked: plasmoid.configuration.fontSizeChecked
+
+	border.width: plasmoid.configuration.displayBorder ? plasmoid.configuration.borderThickness : 0
+	radius: height > width ? height * (plasmoid.configuration.borderRadius / 100) : width * (plasmoid.configuration.borderRadius / 100)
 	
-	implicitHeight: numberLbl.implicitHeight
-	implicitWidth: Math.max(numberLbl.implicitWidth + 4, implicitHeight)
-	
-	property alias text: numberLbl.text 
-	
-	PlasmaComponents.Label{
-		id: numberLbl
+	Text {
+		id: numberText
+
 		anchors.centerIn: parent
-		color: PlasmaCore.Theme.textColor
 		text: pagerModel.currentPage + 1
+		color: plasmoid.configuration.fontColor
+		font {
+			family: plasmoid.configuration.fontFamily || PlasmaCore.Theme.defaultFont.family
+			bold: plasmoid.configuration.fontBold
+			italic: plasmoid.configuration.fontItalic
+			pixelSize: fontSizeChecked ? plasmoid.configuration.fontSize : Math.min(parent.height*0.7, parent.width*0.7)
+		}
 	}
 }

@@ -26,7 +26,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
-import "lib"
+import "./lib"
 
 Item{
 	id: root
@@ -37,7 +37,7 @@ Item{
 						   }
 		
 	Plasmoid.switchWidth: switch(plasmoid.configuration.forceLayout){
-						  case 0: return Math.ceil(pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
+						  case 0: return (Math.ceil(pagerModel.count / pagerModel.layoutRows + plasmoid.configuration.fontSize*0.5)) * PlasmaCore.Units.gridUnit
 					      case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
 					      case 2: return 500 * PlasmaCore.Units.gridUnit //compact
 					      }
@@ -98,7 +98,6 @@ Item{
 	Plasmoid.compactRepresentation: CRep { }
 	
 	Plasmoid.fullRepresentation: FRep { }
-	
 	
 	PagerModel {
 		id: pagerModel

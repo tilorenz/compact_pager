@@ -26,4 +26,9 @@ ConfigModel {
          icon: "preferences-desktop-plasma"
          source: "config/configGeneral.qml"
     }
+    ConfigCategory {
+         name: i18n("Appearance")
+         icon: "preferences-desktop-color"
+         source: "config/configAppearance.qml"
+    }
 }

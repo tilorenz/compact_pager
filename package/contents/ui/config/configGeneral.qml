@@ -22,15 +22,16 @@ import QtQuick.Controls 2.5 as QtControls
 
 import org.kde.kirigami 2.5 as Kirigami
 
-
 Kirigami.FormLayout {
+	id: layoutGeneral
+
 	anchors.left: parent.left
 	anchors.right: parent.right
 	
 	property alias cfg_forceLayout: pagerLayout.currentIndex
 	property alias cfg_wrapPage: wrapPage.checked
 	property alias cfg_currentDesktopSelected: currentDesktopSelectedBox.currentIndex
-	
+
 	QtControls.CheckBox {
 		id: wrapPage
 		text: i18n("Navigation wraps around")
@@ -39,7 +40,6 @@ Kirigami.FormLayout {
 	Item {
 		Kirigami.FormData.isSection: true
 	}
-	
 	
 	QtControls.ComboBox {
 		id: pagerLayout

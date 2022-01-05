@@ -24,7 +24,28 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
 GridLayout{
-	anchors.fill: parent
+	property color bgColorHighlight: plasmoid.configuration.bgColorChecked ?
+										Qt.rgba(plasmoid.configuration.bgColor.r,
+												plasmoid.configuration.bgColor.g,
+												plasmoid.configuration.bgColor.b,
+												plasmoid.configuration.bgOpacity / 100
+										) : "transparent"
+	// Dim borders of all but current desktop
+	property color bgColor: Qt.rgba(
+		Math.max(0, bgColorHighlight.r - 0.4),
+		Math.max(0, bgColorHighlight.g - 0.4),
+		Math.max(0, bgColorHighlight.b - 0.4),
+		bgColorHighlight.a
+	)
+	property color borderColorHighlight: plasmoid.configuration.borderColor 
+	// Dim borders of all but current desktop
+	property color borderColor: Qt.rgba(
+		Math.max(0, borderColorHighlight.r - 0.6),
+		Math.max(0, borderColorHighlight.g - 0.6),
+		Math.max(0, borderColorHighlight.b - 0.6),
+		borderColorHighlight.a
+	)
+	//anchors.fill: parent
 	columns: Math.ceil(pagerModel.count / pagerModel.layoutRows)
 	
 	Repeater{
@@ -34,14 +55,14 @@ GridLayout{
 			id: nBox
 			text: index + 1
 			
-			Layout.fillHeight: true
 			Layout.fillWidth: true
-			//make the popup a little larger
-			Layout.preferredHeight: implicitHeight * 3
-			Layout.preferredWidth: implicitWidth * 3
+			Layout.fillHeight: true
+			Layout.minimumHeight: 40
+			Layout.minimumWidth: 40
 			
 			//highlight the current desktop
-			border.color: index === pagerModel.currentPage ? PlasmaCore.Theme.highlightColor : PlasmaCore.Theme.textColor
+			color: index === pagerModel.currentPage ? bgColorHighlight : bgColor
+			border.color: index === pagerModel.currentPage ? borderColorHighlight : borderColor
 			
 			MouseArea{
 				anchors.fill: parent
@@ -53,11 +74,12 @@ GridLayout{
 			}
 		}
 	}
+
 	MouseArea{
-		width: parent.width
-		height: parent.height
+		Layout.fillWidth: true
+		Layout.fillHeight: true
 		onWheel: switchDesktop(wheel)
-		//let clicks through to the MouseAreas in the NumberBoxes
+		// Let clicks through to the MouseAreas in the NumberBoxes
 		propagateComposedEvents: true
 	}
 }
