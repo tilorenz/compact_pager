@@ -39,7 +39,7 @@ Item {
 						   }
 
 	Plasmoid.switchWidth: switch(plasmoid.configuration.forceLayout) {
-							   case 0: return Math.floor(pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
+							   case 0: return Math.floor(1.4 * pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
 							   case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
 							   case 2: return 500 * PlasmaCore.Units.gridUnit //compact
 						  }

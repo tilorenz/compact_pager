@@ -26,36 +26,26 @@ import org.kde.plasma.private.pager 2.0
 
 
 Item {
-	// Fill parent while enforcing the item to be square
-	property double isVertical: parent.height > parent.width
-	width: isVertical ? parent.height : parent.width
-	height: width
+	id: compactLayout
 
-	RowLayout {
-		id: compactLayout
+	Loader {
+		id: compLoader
 		anchors.fill: parent
 
-		Loader {
-			id: compLoader
-			sourceComponent: NumberBox {
-				color: plasmoid.configuration.bgColorChecked ?
-							Qt.rgba(plasmoid.configuration.bgColor.r,
-									plasmoid.configuration.bgColor.g,
-									plasmoid.configuration.bgColor.b,
-									plasmoid.configuration.bgOpacity / 100) : "transparent"
-				border.color: plasmoid.configuration.borderColor
-			}
-
-			Layout.preferredWidth: parent.width * 0.8
-			Layout.preferredHeight: Layout.preferredWidth
-			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+		sourceComponent: NumberBox {
+			color: plasmoid.configuration.bgColorChecked ?
+						Qt.rgba(plasmoid.configuration.bgColor.r,
+								plasmoid.configuration.bgColor.g,
+								plasmoid.configuration.bgColor.b,
+								plasmoid.configuration.bgOpacity / 100) : "transparent"
+			border.color: plasmoid.configuration.borderColor
 		}
+	}
 
-		Binding {
-			target: compLoader.item
-			property: "text"
-			value: pagerModel.currentPage + 1
-		}
+	Binding {
+		target: compLoader.item
+		property: "text"
+		value: pagerModel.currentPage + 1
 	}
 	MouseArea {
 		anchors.fill: parent
@@ -63,5 +53,3 @@ Item {
 		onWheel: switchDesktop(wheel)
 	}
 }
-
-
