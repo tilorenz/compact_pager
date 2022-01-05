@@ -19,6 +19,7 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 2.5 as QtControls
+import QtQuick.Layouts 1.15 as QtLayouts
 
 import org.kde.kirigami 2.5 as Kirigami
 
@@ -41,22 +42,23 @@ Kirigami.FormLayout {
 		Kirigami.FormData.isSection: true
 	}
 	
-	QtControls.ComboBox {
-		id: pagerLayout
-		
+	QtLayouts.RowLayout {
+		QtLayouts.Layout.fillWidth: true
+
 		Kirigami.FormData.label: i18n("Layout:")
-		
-		//TODO find a way to have the ToolTip on the elements instead of the Box. This is ugly & unintuitive.
-		QtControls.ToolTip.delay: 1000
-		QtControls.ToolTip.timeout: 5000
-		QtControls.ToolTip.visible: hovered
-		QtControls.ToolTip.text: switch(currentIndex){
-								 case 0: return "Switch the layout depending on available space."
-								 case 1: return "Always show full layout. Warning: looks broken if not enough space is available."
-								 case 2: return "Always show compact layout."
-								 }
-		
-		model: ["Adaptive", "Full", "Compact"]
+		QtControls.ComboBox {
+			id: pagerLayout
+			model: ["Adaptive", "Full", "Compact"]
+		}
+
+		QtControls.Button {
+			id: infoButton
+			icon.name: "dialog-information"
+			QtControls.ToolTip.visible: hovered
+			QtControls.ToolTip.text: "<b>Adaptive</b>:<br>Switch the layout depending on available space.<br><br>" +
+			                         "<b>Full</b>:<br>Always show full layout.<br><br>" +
+									 "<b>Compact</b>:<br>Always show compact layout."
+		}
 	}
 	
 	Item {

@@ -32,7 +32,7 @@ Kirigami.FormLayout {
 
 	anchors.left: parent.left
 	anchors.right: parent.right
-	
+
 	property string cfg_fontFamily
 	property alias cfg_fontBold: boldCheckBox.checked
 	property alias cfg_fontItalic: italicCheckBox.checked
@@ -166,12 +166,14 @@ Kirigami.FormLayout {
 	QtLayouts.RowLayout {
 		QtLayouts.Layout.fillWidth: true
 		Kirigami.FormData.label: i18n("Border color:")
+		spacing: PlasmaCore.Units.largeSpacing
 
 		KQControls.ColorButton {
 			id: borderColor
 			enabled: displayBorder.checked && !sameColorAsFont.checked
 			showAlphaChannel: true
 		}
+
 
 		QtControls.CheckBox {
 			id: sameColorAsFont
