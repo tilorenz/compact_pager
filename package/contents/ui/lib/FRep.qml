@@ -75,10 +75,6 @@ GridLayout {
 			Layout.preferredHeight: Layout.preferredWidth
 			Layout.minimumWidth: 18
 			Layout.minimumHeight: Layout.minimumWidth
-			// When there is only one row in "full" mode, the vertical alignment
-			// is not perfectly centered for some reason. As a workaround, we
-			// add a bit of top margin in these cases to vertically center it
-			Layout.topMargin: columns == pagerModel.count ? height * 0.2 : 0
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
 			//highlight the current desktop
@@ -92,13 +88,8 @@ GridLayout {
 					//TODO maybe add option for this
 					plasmoid.expanded = false
 				}
+				onWheel: switchDesktop(wheel)
 			}
 		}
-	}
-
-	MouseArea {
-		Layout.fillWidth: true
-		Layout.fillHeight: true
-		onWheel: switchDesktop(wheel)
 	}
 }
