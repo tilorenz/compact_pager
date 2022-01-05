@@ -30,14 +30,15 @@ import "./lib"
 
 Item{
 	id: root
+
 	Plasmoid.switchHeight: switch(plasmoid.configuration.forceLayout){
-						   case 0: return pagerModel.layoutRows * PlasmaCore.Units.gridUnit
+						   case 0: return Math.floor(pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
 						   case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
-						   case 2: return 500 * PlasmaCore.Units.gridUnit //compact
+						   case 2: return 500 * PlasmaCore.Units.gridUnit //compactu
 						   }
 		
 	Plasmoid.switchWidth: switch(plasmoid.configuration.forceLayout){
-						  case 0: return (Math.ceil(pagerModel.count / pagerModel.layoutRows + plasmoid.configuration.fontSize*0.5)) * PlasmaCore.Units.gridUnit
+						  case 0: return Math.floor(pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
 					      case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
 					      case 2: return 500 * PlasmaCore.Units.gridUnit //compact
 					      }

@@ -25,14 +25,13 @@ import org.kde.plasma.private.pager 2.0
 
 
 Item {
-	id: root
 	// Fill parent while enforcing the item to be square
 	property double isVertical: parent.height > parent.width
 	width: isVertical ? parent.height : parent.width
 	height: width
 
 	RowLayout{
-		id: rootLayout
+		id: compactLayout
 		anchors.fill: parent
 
 		Loader{
@@ -56,56 +55,9 @@ Item {
 			property: "text"
 			value: pagerModel.currentPage + 1
 		}
-		
-		
-		states: [
-			State {
-				name: "horizontalPanel"
-				when: plasmoid.formFactor === PlasmaCore.Types.Horizontal
-				
-				PropertyChanges {
-					target: compLoader
-					Layout.topMargin: height * .8 >= item.implicitHeight + 4 ? height * 0.1 : 0
-					Layout.bottomMargin: height * .8 >= item.implicitHeight + 4 ? height * 0.1 : 0
-					Layout.leftMargin: 0
-					Layout.rightMargin: 0
-				}
-			},
-			
-			State {
-				name: "verticalPanel"
-				when: plasmoid.formFactor === PlasmaCore.Types.Vertical
-				
-				PropertyChanges {
-					target: compLoader
-					Layout.topMargin: 0
-					Layout.bottomMargin: 0
-					Layout.leftMargin: width * .8 >= item.implicitWidth + 4 ? width * 0.1 : 0
-					Layout.rightMargin: width * .8 >= item.implicitWidth + 4 ? width * 0.1 : 0
-				}
-			},
-			
-			State{
-				name: "other"
-				when: plasmoid.formFactor !== PlasmaCore.Types.Horizontal && plasmoid.formFactor !== PlasmaCore.Types.Vertical
-				
-				PropertyChanges {
-					target: compLoader
-					Layout.topMargin: 0
-					Layout.bottomMargin: 0
-					Layout.leftMargin: 0
-					Layout.rightMargin: 0
-					Layout.fillHeight: true
-					Layout.fillWidth: true
-					Layout.preferredHeight: root.height
-					Layout.preferredWidth: root.width
-				}
-			}
-		]
 	}
 	MouseArea{
 		anchors.fill: parent
-		
 		onClicked: plasmoid.expanded = !plasmoid.expanded
 		onWheel: switchDesktop(wheel)
 	}

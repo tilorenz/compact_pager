@@ -23,14 +23,17 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
+
 GridLayout{
+	id: fullLayout
+
 	property color bgColorHighlight: plasmoid.configuration.bgColorChecked ?
 										Qt.rgba(plasmoid.configuration.bgColor.r,
 												plasmoid.configuration.bgColor.g,
 												plasmoid.configuration.bgColor.b,
 												plasmoid.configuration.bgOpacity / 100
 										) : "transparent"
-	// Dim borders of all but current desktop
+	// Dim backgrounds of all but current desktop
 	property color bgColor: Qt.rgba(
 		Math.max(0, bgColorHighlight.r - 0.4),
 		Math.max(0, bgColorHighlight.g - 0.4),
@@ -45,20 +48,37 @@ GridLayout{
 		Math.max(0, borderColorHighlight.b - 0.6),
 		borderColorHighlight.a
 	)
-	//anchors.fill: parent
-	columns: Math.ceil(pagerModel.count / pagerModel.layoutRows)
+
+	columns: {
+		let isVertical = height > width;
+		// If there's not enough vertical space, show in one row
+		if (!isVertical && height < 40) {
+			return pagerModel.count
+		// If there's not enough horizontal space, show in one column
+		} else if (isVertical && width < 60) {
+			return 1
+		}
+		return Math.ceil(pagerModel.count / pagerModel.layoutRows)
+	}
 	
 	Repeater{
 		id: dRep
 		model: pagerModel
-		NumberBox{
+
+		NumberBox {
 			id: nBox
 			text: index + 1
-			
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			Layout.minimumHeight: 40
-			Layout.minimumWidth: 40
+			Layout.preferredWidth: 40
+			Layout.preferredHeight: Layout.preferredWidth
+			Layout.minimumWidth: 18
+			Layout.minimumHeight: Layout.minimumWidth
+			// When there is only one row in "full" mode, the vertical alignment
+			// is not perfectly centered for some reason. As a workaround, we
+			// add a bit of top margin in these cases to vertically center it
+			Layout.topMargin: columns == pagerModel.count ? height * 0.2 : 0
+			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 			
 			//highlight the current desktop
 			color: index === pagerModel.currentPage ? bgColorHighlight : bgColor
@@ -79,7 +99,5 @@ GridLayout{
 		Layout.fillWidth: true
 		Layout.fillHeight: true
 		onWheel: switchDesktop(wheel)
-		// Let clicks through to the MouseAreas in the NumberBoxes
-		propagateComposedEvents: true
 	}
 }
