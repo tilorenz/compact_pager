@@ -29,91 +29,90 @@ import org.kde.plasma.private.pager 2.0
 
 import "./lib"
 
-Item{
+Item {
 	id: root
 
-	Plasmoid.switchHeight: switch(plasmoid.configuration.forceLayout){
-						   case 0: return Math.floor(pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
-						   case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
-						   case 2: return 500 * PlasmaCore.Units.gridUnit //compactu
+	Plasmoid.switchHeight: switch(plasmoid.configuration.forceLayout) {
+							   case 0: return Math.floor(pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
+							   case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
+							   case 2: return 500 * PlasmaCore.Units.gridUnit //compactu
 						   }
-		
-	Plasmoid.switchWidth: switch(plasmoid.configuration.forceLayout){
-						  case 0: return Math.floor(pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
-					      case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
-					      case 2: return 500 * PlasmaCore.Units.gridUnit //compact
-					      }
-	
+
+	Plasmoid.switchWidth: switch(plasmoid.configuration.forceLayout) {
+							   case 0: return Math.floor(pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
+							   case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
+							   case 2: return 500 * PlasmaCore.Units.gridUnit //compact
+						  }
+
 	Plasmoid.status: pagerModel.shouldShowPager ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
-	
+
 	property int wheelDelta: 0
-	
+
 	function action_addDesktop() {
 		pagerModel.addDesktop();
 	}
-	
+
 	function action_removeDesktop() {
 		pagerModel.removeDesktop();
 	}
-	
+
 	function action_openKCM() {
 		KQuickControlsAddonsComponents.KCMShell.openSystemSettings("kcm_kwin_virtualdesktops");
 	}
-	
-	function switchDesktop(wheel){
+
+	function switchDesktop(wheel) {
 		// Magic number 120 for common "one click, see:
 		// https://doc.qt.io/qt-5/qml-qtquick-wheelevent.html#angleDelta-prop
 		wheelDelta += wheel.angleDelta.y || wheel.angleDelta.x;
-		
+
 		var increment = 0;
-		
+
 		while (wheelDelta >= 120) {
 			wheelDelta -= 120;
 			increment++;
 		}
-		
+
 		while (wheelDelta <= -120) {
 			wheelDelta += 120;
 			increment--;
 		}
-		
+
 		while (increment !== 0) {
 			if (increment < 0) {
-				var nextPage = plasmoid.configuration.wrapPage?
-							(pagerModel.currentPage + 1) % pagerModel.count :
-							Math.min(pagerModel.currentPage + 1, pagerModel.count - 1);
+				var nextPage = plasmoid.configuration.wrapPage ?
+									(pagerModel.currentPage + 1) % pagerModel.count :
+									Math.min(pagerModel.currentPage + 1, pagerModel.count - 1);
 				if(nextPage !== pagerModel.currentPage)
 					pagerModel.changePage(nextPage);
 			} else {
 				var previousPage = plasmoid.configuration.wrapPage ?
-							(pagerModel.count + pagerModel.currentPage - 1) % pagerModel.count :
-							Math.max(pagerModel.currentPage - 1, 0);
+										(pagerModel.count + pagerModel.currentPage - 1) % pagerModel.count :
+										Math.max(pagerModel.currentPage - 1, 0);
 				if(previousPage !== pagerModel.currentPage)
 					pagerModel.changePage(previousPage);
 			}
-			
+
 			increment += (increment < 0) ? 1 : -1;
 		}
 	}
-	
-	
+
 	Plasmoid.compactRepresentation: CRep { }
-	
+
 	Plasmoid.fullRepresentation: FRep { }
-	
+
 	PagerModel {
 		id: pagerModel
-		
+
 		enabled: root.visible
-		
+
 		showDesktop: (plasmoid.configuration.currentDesktopSelected === 1)
-		
+
 		showOnlyCurrentScreen: false
 		screenGeometry: plasmoid.screenGeometry
-		
+
 		pagerType: PagerModel.VirtualDesktops
 	}
-	
+
 	Component.onCompleted: {
 		if (KQuickControlsAddonsComponents.KCMShell.authorize("kcm_kwin_virtualdesktops.desktop").length > 0) {
 			plasmoid.setAction("addDesktop", i18n("Add Virtual Desktop"), "list-add");
@@ -121,7 +120,7 @@ Item{
 			plasmoid.action("removeDesktop").enabled = Qt.binding(function() {
 				return pagerModel.count > 1;
 			});
-			
+
 			plasmoid.setAction("openKCM", i18n("Configure Virtual Desktops..."), "configure");
 		}
 	}

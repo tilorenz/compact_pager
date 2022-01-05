@@ -29,7 +29,7 @@ Kirigami.FormLayout {
 
 	anchors.left: parent.left
 	anchors.right: parent.right
-	
+
 	property alias cfg_forceLayout: pagerLayout.currentIndex
 	property alias cfg_wrapPage: wrapPage.checked
 	property alias cfg_currentDesktopSelected: currentDesktopSelectedBox.currentIndex
@@ -38,11 +38,11 @@ Kirigami.FormLayout {
 		id: wrapPage
 		text: i18n("Navigation wraps around")
 	}
-	
+
 	Item {
 		Kirigami.FormData.isSection: true
 	}
-	
+
 	QtLayouts.RowLayout {
 		QtLayouts.Layout.fillWidth: true
 
@@ -61,15 +61,15 @@ Kirigami.FormLayout {
 									 "<b>Compact</b>:<br>Always show compact layout."
 		}
 	}
-	
+
 	Item {
 		Kirigami.FormData.isSection: true
 	}
-	
+
 	QtControls.ComboBox {
 		id: currentDesktopSelectedBox
 		Kirigami.FormData.label: i18n("Selecting current virtual desktop:")
-		
+
 		model: ["Does nothing", "Shows the desktop"]
 	}
 }

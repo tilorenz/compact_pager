@@ -31,11 +31,11 @@ Item {
 	width: isVertical ? parent.height : parent.width
 	height: width
 
-	RowLayout{
+	RowLayout {
 		id: compactLayout
 		anchors.fill: parent
 
-		Loader{
+		Loader {
 			id: compLoader
 			sourceComponent: NumberBox {
 				color: plasmoid.configuration.bgColorChecked ?
@@ -50,14 +50,14 @@ Item {
 			Layout.preferredHeight: Layout.preferredWidth
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 		}
-		
-		Binding{
+
+		Binding {
 			target: compLoader.item
 			property: "text"
 			value: pagerModel.currentPage + 1
 		}
 	}
-	MouseArea{
+	MouseArea {
 		anchors.fill: parent
 		onClicked: plasmoid.expanded = !plasmoid.expanded
 		onWheel: switchDesktop(wheel)

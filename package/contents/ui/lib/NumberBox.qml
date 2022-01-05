@@ -29,7 +29,7 @@ Rectangle {
 
 	border.width: plasmoid.configuration.displayBorder ? plasmoid.configuration.borderThickness : 0
 	radius: height > width ? height * (plasmoid.configuration.borderRadius / 100) : width * (plasmoid.configuration.borderRadius / 100)
-	
+
 	Text {
 		id: numberText
 

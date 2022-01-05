@@ -25,7 +25,7 @@ import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
 import org.kde.plasma.private.pager 2.0
 
 
-GridLayout{
+GridLayout {
 	id: fullLayout
 
 	property color bgColorHighlight: plasmoid.configuration.bgColorChecked ?
@@ -61,8 +61,8 @@ GridLayout{
 		}
 		return Math.ceil(pagerModel.count / pagerModel.layoutRows)
 	}
-	
-	Repeater{
+
+	Repeater {
 		id: dRep
 		model: pagerModel
 
@@ -80,12 +80,12 @@ GridLayout{
 			// add a bit of top margin in these cases to vertically center it
 			Layout.topMargin: columns == pagerModel.count ? height * 0.2 : 0
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-			
+
 			//highlight the current desktop
 			color: index === pagerModel.currentPage ? bgColorHighlight : bgColor
 			border.color: index === pagerModel.currentPage ? borderColorHighlight : borderColor
-			
-			MouseArea{
+
+			MouseArea {
 				anchors.fill: parent
 				onClicked: {
 					pagerModel.changePage(model.index)
@@ -96,7 +96,7 @@ GridLayout{
 		}
 	}
 
-	MouseArea{
+	MouseArea {
 		Layout.fillWidth: true
 		Layout.fillHeight: true
 		onWheel: switchDesktop(wheel)
