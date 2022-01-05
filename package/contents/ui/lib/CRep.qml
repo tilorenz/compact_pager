@@ -30,7 +30,9 @@ Item {
 
 	Loader {
 		id: compLoader
-		anchors.fill: parent
+		width: parent.width * 0.75
+		height: parent.height * 0.85
+		anchors.centerIn: parent
 
 		sourceComponent: NumberBox {
 			color: plasmoid.configuration.bgColorChecked ?
