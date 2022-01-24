@@ -29,11 +29,11 @@ GridLayout {
 	id: fullLayout
 
 	property color bgColorHighlight: plasmoid.configuration.bgColorChecked ?
-										Qt.rgba(plasmoid.configuration.bgColor.r,
-												plasmoid.configuration.bgColor.g,
-												plasmoid.configuration.bgColor.b,
-												plasmoid.configuration.bgOpacity / 100
-										) : "transparent"
+			plasmoid.configuration.bgColor : PlasmaCore.Theme.backgroundColor
+
+	property color fontColor: plasmoid.configuration.fontColorChecked ? 
+			plasmoid.configuration.fontColor : PlasmaCore.Theme.textColor
+
 	// Dim backgrounds of all but current desktop
 	property color bgColor: Qt.rgba(
 		Math.max(0, bgColorHighlight.r - 0.4),
@@ -41,7 +41,9 @@ GridLayout {
 		Math.max(0, bgColorHighlight.b - 0.4),
 		bgColorHighlight.a
 	)
-	property color borderColorHighlight: plasmoid.configuration.borderColor 
+	property color borderColorHighlight: plasmoid.configuration.sameBorderColorAsFont ? 
+			fontColor : plasmoid.configuration.borderColor
+
 	// Dim borders of all but current desktop
 	property color borderColor: Qt.rgba(
 		Math.max(0, borderColorHighlight.r - 0.4),

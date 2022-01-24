@@ -28,6 +28,9 @@ import org.kde.plasma.private.pager 2.0
 Item {
 	id: compactLayout
 
+	property color fontColor: plasmoid.configuration.fontColorChecked ? 
+			plasmoid.configuration.fontColor : PlasmaCore.Theme.textColor
+
 	Loader {
 		id: compLoader
 		width: parent.width * 0.75
@@ -36,11 +39,9 @@ Item {
 
 		sourceComponent: NumberBox {
 			color: plasmoid.configuration.bgColorChecked ?
-						Qt.rgba(plasmoid.configuration.bgColor.r,
-								plasmoid.configuration.bgColor.g,
-								plasmoid.configuration.bgColor.b,
-								plasmoid.configuration.bgOpacity / 100) : "transparent"
-			border.color: plasmoid.configuration.borderColor
+					plasmoid.configuration.bgColor : PlasmaCore.Theme.backgroundColor
+			border.color: plasmoid.configuration.sameBorderColorAsFont ? 
+					fontColor : plasmoid.configuration.borderColor
 		}
 	}
 

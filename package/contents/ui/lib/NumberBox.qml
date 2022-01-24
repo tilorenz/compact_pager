@@ -26,6 +26,8 @@ import org.kde.plasma.private.pager 2.0
 Rectangle {
 	property alias text: numberText.text 
 	property bool fontSizeChecked: plasmoid.configuration.fontSizeChecked
+	property color fontColor: plasmoid.configuration.fontColorChecked ? 
+			plasmoid.configuration.fontColor : PlasmaCore.Theme.textColor
 
 	border.width: plasmoid.configuration.displayBorder ? plasmoid.configuration.borderThickness : 0
 	radius: height > width ? height * (plasmoid.configuration.borderRadius / 100) : width * (plasmoid.configuration.borderRadius / 100)
@@ -35,8 +37,8 @@ Rectangle {
 
 		anchors.centerIn: parent
 		text: pagerModel.currentPage + 1
-		color: plasmoid.configuration.fontColor
-		font {
+		color: fontColor
+	 	font {
 			family: plasmoid.configuration.fontFamily || PlasmaCore.Theme.defaultFont.family
 			bold: plasmoid.configuration.fontBold
 			italic: plasmoid.configuration.fontItalic

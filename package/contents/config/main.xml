@@ -25,7 +25,7 @@
 					<tooltip>Switch the layout depending on available space.</tooltip>
 				</choice>
 				<choice name="Full">
-					<tooltip>Always show full layout. Warning: looks broken if not enough space is available.</tooltip>
+					<tooltip>Always show full layout.</tooltip>
 				</choice>
 				<choice name="Compact">
 					<tooltip>Always show compact layout.</tooltip>
@@ -37,7 +37,7 @@
 
 	<group name="Appearance">
 		<entry name="fontFamily" type="String">
-			<label>The family font.</label>
+			<label>The font family.</label>
 			<default></default>
 		</entry>
 		<entry name="fontBold" type="Bool">
@@ -49,7 +49,7 @@
 			<default>false</default>
 		</entry>
 		<entry name="fontSizeChecked" type="Bool">
-			<label>Whether the user has checked the font size checkbox.</label>
+			<label>Whether to use a custom font size.</label>
 			<default>false</default>
 		</entry>
 		<entry name="fontSize" type="Int">
@@ -60,7 +60,11 @@
 			<label>The color of the font.</label>
 			<default>#FFFFFF</default>
 		</entry>
-		<entry name="displayBorder" type="Bool">
+		<entry name="fontColorChecked" type="Bool">
+			<label>Whether to use a custom font color.</label>
+			<default>false</default>
+		</entry>		
+			<entry name="displayBorder" type="Bool">
 			<label>Whether to display the border of the desktop rectangles.</label>
 			<default>true</default>
 		</entry>
@@ -81,16 +85,12 @@
 			<default>25</default>
 		</entry>
 		<entry name="bgColorChecked" type="Bool">
-			<label>Whether the user has checked the background color checkbox.</label>
-			<default>true</default>
+			<label>Whether to use a custom background color.</label>
+			<default>false</default>
 		</entry>
 		<entry name="bgColor" type="Color">
 			<label>The color of the desktop rectangle background.</label>
 			<default>#333333</default>
-		</entry>
-		<entry name="bgOpacity" type="Int">
-			<label>The opacity of the desktop rectangle background.</label>
-			<default>100</default>
 		</entry>
 	</group>
 

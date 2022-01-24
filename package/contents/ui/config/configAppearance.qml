@@ -37,7 +37,8 @@ Kirigami.FormLayout {
 	property string cfg_fontFamily
 	property alias cfg_fontBold: boldCheckBox.checked
 	property alias cfg_fontItalic: italicCheckBox.checked
-	property alias cfg_fontColor: fontColor.color
+	property alias cfg_fontColor: fontColorValue.color
+	property alias cfg_fontColorChecked: fixedFontColor.checked
 	property alias cfg_fontSizeChecked: fontSize.checked
 	property alias cfg_fontSize: fontSizeValue.value
 	property alias cfg_displayBorder: displayBorder.checked
@@ -45,9 +46,8 @@ Kirigami.FormLayout {
 	property alias cfg_sameBorderColorAsFont: sameColorAsFont.checked
 	property alias cfg_borderThickness: borderThickness.value
 	property alias cfg_borderRadius: borderRadius.value
-	property alias cfg_bgColorChecked: bgColorCheckBox.checked
-	property alias cfg_bgColor: bgColor.color
-	property alias cfg_bgOpacity: opacityValue.value
+	property alias cfg_bgColorChecked: fixedBGColor.checked
+	property alias cfg_bgColor: bgColorValue.color
 
 
 	// Taken from org.kde.plasma.digitalclock
@@ -79,6 +79,9 @@ Kirigami.FormLayout {
 		}
 	}
 
+	//
+	// FONT
+	//
 	Item {
 		Kirigami.FormData.isSection: true
 		Kirigami.FormData.label: i18n("Font")
@@ -142,14 +145,23 @@ Kirigami.FormLayout {
 		}
 	}
 
+	QtLayouts.RowLayout {
+		QtLayouts.Layout.fillWidth: true
+		Kirigami.FormData.label: i18n("Fixed font color:")
 
-	KQControls.ColorButton {
-		id: fontColor
-		Kirigami.FormData.label: i18n("Font color:")
-		showAlphaChannel: true
-		onColorChanged: {
-			if (sameColorAsFont.checked) {
-				borderColor.color = fontColor.color
+		QtControls.CheckBox {
+			id: fixedFontColor
+		}
+
+		KQControls.ColorButton {
+			id: fontColorValue
+			enabled: fixedFontColor.checked
+			Kirigami.FormData.label: i18n("Font color:")
+			showAlphaChannel: true
+			onColorChanged: {
+				if (sameColorAsFont.checked) {
+					borderColor.color = fontColor.color
+				}
 			}
 		}
 	}
@@ -179,7 +191,6 @@ Kirigami.FormLayout {
 		QtControls.CheckBox {
 			id: sameColorAsFont
 			text: i18n("Same as font")
-			onCheckedChanged: { if(checked) borderColor.color = fontColor.color }
 		}
 	}
 
@@ -199,7 +210,7 @@ Kirigami.FormLayout {
 		minimumValue: 0
 		maximumValue: 100
 		stepSize: 1
-		suffix: " " + i18n(" %")
+		suffix: " " + i18n("%")
 	}
 
 	Kirigami.Separator {
@@ -209,44 +220,16 @@ Kirigami.FormLayout {
 
 	QtLayouts.RowLayout {
 		QtLayouts.Layout.fillWidth: true
-		Kirigami.FormData.label: i18n("Background color:")
+		Kirigami.FormData.label: i18n("Fixed background color:")
 
 		QtControls.CheckBox {
-			id: bgColorCheckBox
+			id: fixedBGColor
 		}
 
 		KQControls.ColorButton {
-			id: bgColor
-			enabled: bgColorCheckBox.checked
-		}
-	}
-
-	QtLayouts.RowLayout {
-		QtLayouts.Layout.fillWidth: true
-		Kirigami.FormData.label: i18n("Opacity:")
-
-		PlasmaComponents3.Slider {
-			id: sliderOpacity
-			from: 0
-			to: 100
-			stepSize: 1
-			value: opacityValue.value
-			enabled: bgColorCheckBox.checked
-			onValueChanged: {
-				opacityValue.value = value
-			}
-		}
-
-		QtControls1.SpinBox { // SpinBox in Controls 2.5 doesn't provide "suffix"
-			id: opacityValue
-			minimumValue: 0
-			maximumValue: 100
-			stepSize: 1
-			suffix: " " + i18n(" %")
-			enabled: bgColorCheckBox.checked
-			onValueChanged: {
-				sliderOpacity.value = value
-			}
+			id: bgColorValue
+			showAlphaChannel: true
+			enabled: fixedBGColor.checked
 		}
 	}
 }
