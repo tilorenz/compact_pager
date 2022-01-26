@@ -15,3 +15,4 @@ The pager is available on the [KDE store](https://www.pling.com/p/1506284/), so 
 ## Gallery
 ![GIF showing adaptive behaviour](https://user-images.githubusercontent.com/22967053/148304695-b4954033-d14d-4c28-a917-5ccf35785913.gif)
 ![Full representation in vertical panel](https://user-images.githubusercontent.com/22967053/148304504-111ef2e8-9db6-4649-974f-77ba37be59a9.png)
+![Appearance Config](https://user-images.githubusercontent.com/59516401/151220711-2b2fe453-65c9-40a0-85b5-8e2e88ce426d.jpg)
