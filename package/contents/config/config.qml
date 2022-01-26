@@ -1,5 +1,6 @@
 /*
- *  Copyright 2013 Marco Martin <mart@kde.org>
+ *  Copyright 2013  Marco Martin <mart@kde.org>
+ *  Copyright 2022  Diego Miguel <hello@diegomiguel.me>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,9 +22,14 @@ import QtQuick 2.0
 import org.kde.plasma.configuration 2.0
 
 ConfigModel {
-    ConfigCategory {
-         name: i18n("General")
-         icon: "preferences-desktop-plasma"
-         source: "configGeneral.qml"
-    }
+	ConfigCategory {
+		name: i18n("General")
+		icon: "preferences-desktop-plasma"
+ 		source: "config/configGeneral.qml"
+	}
+	ConfigCategory {
+		name: i18n("Appearance")
+ 		icon: "preferences-desktop-color"
+		source: "config/configAppearance.qml"
+	}
 }
