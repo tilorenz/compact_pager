@@ -38,9 +38,9 @@ GridLayout {
 	property color bgColor: plasmoid.configuration.inactiveBgColorChecked ?
 		plasmoid.configuration.inactiveBgColor :
 		Qt.rgba(
-			Math.max(0, bgColorHighlight.r - 0.4),
-			Math.max(0, bgColorHighlight.g - 0.4),
-			Math.max(0, bgColorHighlight.b - 0.4),
+			Math.max(0, bgColorHighlight.r * 0.65),
+			Math.max(0, bgColorHighlight.g * 0.65),
+			Math.max(0, bgColorHighlight.b * 0.65),
 			bgColorHighlight.a
 		)
 	property color borderColorHighlight: plasmoid.configuration.sameBorderColorAsFont ? 
