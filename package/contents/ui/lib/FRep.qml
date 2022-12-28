@@ -28,19 +28,21 @@ import org.kde.plasma.private.pager 2.0
 GridLayout {
 	id: fullLayout
 
-	property color bgColorHighlight: plasmoid.configuration.bgColorChecked ?
-			plasmoid.configuration.bgColor : PlasmaCore.Theme.backgroundColor
+	property color bgColorHighlight: plasmoid.configuration.activeBgColorChecked ?
+			plasmoid.configuration.activeBgColor : PlasmaCore.Theme.backgroundColor
 
 	property color fontColor: plasmoid.configuration.fontColorChecked ? 
 			plasmoid.configuration.fontColor : PlasmaCore.Theme.textColor
 
 	// Dim backgrounds of all but current desktop
-	property color bgColor: Qt.rgba(
-		Math.max(0, bgColorHighlight.r - 0.4),
-		Math.max(0, bgColorHighlight.g - 0.4),
-		Math.max(0, bgColorHighlight.b - 0.4),
-		bgColorHighlight.a
-	)
+	property color bgColor: plasmoid.configuration.inactiveBgColorChecked ?
+		plasmoid.configuration.inactiveBgColor :
+		Qt.rgba(
+			Math.max(0, bgColorHighlight.r - 0.4),
+			Math.max(0, bgColorHighlight.g - 0.4),
+			Math.max(0, bgColorHighlight.b - 0.4),
+			bgColorHighlight.a
+		)
 	property color borderColorHighlight: plasmoid.configuration.sameBorderColorAsFont ? 
 			fontColor : plasmoid.configuration.borderColor
 

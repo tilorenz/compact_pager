@@ -46,8 +46,10 @@ Kirigami.FormLayout {
 	property alias cfg_sameBorderColorAsFont: sameColorAsFont.checked
 	property alias cfg_borderThickness: borderThickness.value
 	property alias cfg_borderRadius: borderRadius.value
-	property alias cfg_bgColorChecked: fixedBGColor.checked
-	property alias cfg_bgColor: bgColorValue.color
+	property alias cfg_activeBgColorChecked: fixedActiveBGColor.checked
+	property alias cfg_activeBgColor: activeBgColorValue.color
+	property alias cfg_inactiveBgColorChecked: fixedInactiveBGColor.checked
+	property alias cfg_inactiveBgColor: inactiveBgColorValue.color
 
 
 	// Taken from org.kde.plasma.digitalclock
@@ -220,16 +222,31 @@ Kirigami.FormLayout {
 
 	QtLayouts.RowLayout {
 		QtLayouts.Layout.fillWidth: true
-		Kirigami.FormData.label: i18n("Fixed background color:")
+		Kirigami.FormData.label: i18n("Fixed active background color:")
 
 		QtControls.CheckBox {
-			id: fixedBGColor
+			id: fixedActiveBGColor
 		}
 
 		KQControls.ColorButton {
-			id: bgColorValue
+			id: activeBgColorValue
 			showAlphaChannel: true
-			enabled: fixedBGColor.checked
+			enabled: fixedActiveBGColor.checked
+		}
+	}
+
+	QtLayouts.RowLayout {
+		QtLayouts.Layout.fillWidth: true
+		Kirigami.FormData.label: i18n("Fixed inactive background color:")
+
+		QtControls.CheckBox {
+			id: fixedInactiveBGColor
+		}
+
+		KQControls.ColorButton {
+			id: inactiveBgColorValue
+			showAlphaChannel: true
+			enabled: fixedInactiveBGColor.checked
 		}
 	}
 }
