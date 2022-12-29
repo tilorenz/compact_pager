@@ -84,13 +84,21 @@
 			<label>The radius of the borders.</label>
 			<default>25</default>
 		</entry>
-		<entry name="bgColorChecked" type="Bool">
+		<entry name="activeBgColorChecked" type="Bool">
+			<label>Whether to use a custom active background color.</label>
+			<default>false</default>
+		</entry>
+		<entry name="activeBgColor" type="Color">
+			<label>The color of the desktop rectangle background.</label>
+			<default>#333333</default>
+		</entry>
+		<entry name="inactiveBgColorChecked" type="Bool">
 			<label>Whether to use a custom background color.</label>
 			<default>false</default>
 		</entry>
-		<entry name="bgColor" type="Color">
+		<entry name="inactiveBgColor" type="Color">
 			<label>The color of the desktop rectangle background.</label>
-			<default>#333333</default>
+			<default>#222222</default>
 		</entry>
 	</group>
 

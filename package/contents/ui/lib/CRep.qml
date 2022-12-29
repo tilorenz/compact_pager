@@ -38,8 +38,8 @@ Item {
 		anchors.centerIn: parent
 
 		sourceComponent: NumberBox {
-			color: plasmoid.configuration.bgColorChecked ?
-					plasmoid.configuration.bgColor : PlasmaCore.Theme.backgroundColor
+			color: plasmoid.configuration.activeBgColorChecked ?
+					plasmoid.configuration.activeBgColor : PlasmaCore.Theme.backgroundColor
 			border.color: plasmoid.configuration.sameBorderColorAsFont ? 
 					fontColor : plasmoid.configuration.borderColor
 		}
