@@ -44,7 +44,7 @@ Item {
 							   case 2: return 500 * PlasmaCore.Units.gridUnit //compact
 						  }
 
-	Plasmoid.status: pagerModel.shouldShowPager ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
+	Plasmoid.status: (pagerModel.shouldShowPager || plasmoid.configuration.stayVisible) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
 
 	property int wheelDelta: 0
 

@@ -6,6 +6,10 @@
 <kcfgfile name=""/>
 
 	<group name="General">
+		<entry name="stayVisible" type="Bool">
+			<label>Whether to stay visible when there is only one virtual desktop</label>
+			<default>true</default>
+		</entry>
 		<entry name="enableScrolling" type="Bool">
 			<label>Whether to enable scrolling to change the active desktop</label>
 			<default>true</default>

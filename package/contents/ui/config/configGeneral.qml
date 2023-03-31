@@ -34,6 +34,12 @@ Kirigami.FormLayout {
 	property alias cfg_enableScrolling: enableScrolling.checked
 	property alias cfg_wrapPage: wrapPage.checked
 	property alias cfg_currentDesktopSelected: currentDesktopSelectedBox.currentIndex
+	property alias cfg_stayVisible: stayVisible.checked
+
+	QtControls.CheckBox {
+		id: stayVisible
+		text: i18n("Stay visible when there is only one virtual desktop")
+	}
 
 	QtControls.CheckBox {
 		id: enableScrolling
