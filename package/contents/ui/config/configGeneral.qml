@@ -31,11 +31,18 @@ Kirigami.FormLayout {
 	anchors.right: parent.right
 
 	property alias cfg_forceLayout: pagerLayout.currentIndex
+	property alias cfg_enableScrolling: enableScrolling.checked
 	property alias cfg_wrapPage: wrapPage.checked
 	property alias cfg_currentDesktopSelected: currentDesktopSelectedBox.currentIndex
 
 	QtControls.CheckBox {
+		id: enableScrolling
+		text: i18n("Enable scrolling to change the active desktop")
+	}
+
+	QtControls.CheckBox {
 		id: wrapPage
+		enabled: cfg_enableScrolling
 		text: i18n("Navigation wraps around")
 	}
 
