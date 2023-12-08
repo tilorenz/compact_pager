@@ -93,7 +93,7 @@ GridLayout {
 					//TODO maybe add option for this
 					plasmoid.expanded = false
 				}
-				onWheel: plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : undefined
+				onWheel: (wheel) => { plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : {} }
 			}
 		}
 	}

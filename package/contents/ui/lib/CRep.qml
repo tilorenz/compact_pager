@@ -54,6 +54,6 @@ Item {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: plasmoid.expanded = !plasmoid.expanded
-		onWheel: plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : undefined
+		onWheel: (wheel) => { plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : {} }
 	}
 }

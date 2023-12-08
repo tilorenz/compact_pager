@@ -27,7 +27,10 @@ import org.kde.plasma.components as PlasmaComponents
 import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
+
 import org.kde.plasma.private.pager
+import org.kde.kcmutils as KCM
+import org.kde.config as KConfig
 
 import "./lib"
 
@@ -110,20 +113,31 @@ PlasmoidItem {
 		showDesktop: (plasmoid.configuration.currentDesktopSelected === 1)
 
 		showOnlyCurrentScreen: false
-		screenGeometry: plasmoid.screenGeometry
+		screenGeometry: root.screenGeometry
 
 		pagerType: PagerModel.VirtualDesktops
 	}
 
-	Component.onCompleted: {
-		if (KQuickControlsAddonsComponents.KCMShell.authorize("kcm_kwin_virtualdesktops.desktop").length > 0) {
-			plasmoid.setAction("addDesktop", i18n("Add Virtual Desktop"), "list-add");
-			plasmoid.setAction("removeDesktop", i18n("Remove Virtual Desktop"), "list-remove");
-			plasmoid.action("removeDesktop").enabled = Qt.binding(function() {
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: "Add Virtual Desktop"
+            icon.name: "list-add"
+            visible: KConfig.KAuthorized.authorize("kcm_kwin_virtualdesktops")
+            onTriggered: pagerModel.addDesktop()
+        },
+        PlasmaCore.Action {
+            text: "Remove Virtual Desktop"
+            icon.name: "list-remove"
+            visible: KConfig.KAuthorized.authorize("kcm_kwin_virtualdesktops")
+			enabled: Qt.binding(function() {
 				return pagerModel.count > 1;
 			});
-
-			plasmoid.setAction("openKCM", i18n("Configure Virtual Desktops..."), "configure");
-		}
-	}
+            onTriggered: pagerModel.removeDesktop()
+        },
+        PlasmaCore.Action {
+            text: "Configure Virtual Desktops…"
+            visible: KConfig.KAuthorized.authorize("kcm_kwin_virtualdesktops")
+            onTriggered: KCM.KCMLauncher.openSystemSettings("kcm_kwin_virtualdesktops")
+        }
+    ]
 }
