@@ -1,22 +1,22 @@
  # Compact Pager
 A compact pager for the [KDE Plasma desktop](https://kde.org/plasma-desktop/), for those who don't like how much space the normal plasma pager takes.
 
-For the Plasma 5 version, use the plasma5 branch.
+For the Plasma 5 version, see the [plasma5 branch](https://github.com/tilorenz/compact_pager/tree/plasma5).
 
 ![Full represtation in panel](https://user-images.githubusercontent.com/22967053/148304498-b7d3938b-4d0a-4559-89bd-3b68e561501d.png)
 ![Compact representation, expanded](https://user-images.githubusercontent.com/59516401/151219272-5a776f43-7f9c-4403-b942-079bb77a3e9c.jpg)
 
 
 ## Installation
-The pager is available on the [KDE store](https://www.pling.com/p/1506284/), so you can download and install it directly from Plasma.
+The pager is available on the [KDE store](https://www.pling.com/p/2112443/) ([plasma 5 version](https://www.pling.com/p/1506284/)), so you can download and install it directly from Plasma.
 
 ## Manual Installation
 - Clone the repo (or download & extract it): `git clone https://github.com/tilorenz/compact_pager.git`
-- `kpackagetool5 -i compact_pager/package/ -t Plasma/Applet`
+- `kpackagetool6 -i compact_pager/package/ -t Plasma/Applet`
 
 **To update the plasmoid**, inside the main folder, do:
 - `git pull`
-- `kpackagetool5 -u package/ -t Plasma/Applet`
+- `kpackagetool6 -u package/ -t Plasma/Applet`
 - for updating the instances you already have on your desktop/panel, you may need to log out and in again
 
 ## Development
