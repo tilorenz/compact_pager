@@ -18,11 +18,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.5
-import QtQuick.Controls 2.5 as QtControls
-import QtQuick.Layouts 1.15 as QtLayouts
-
-import org.kde.kirigami 2.5 as Kirigami
+import QtQuick
+import QtQuick.Controls as QtControls
+import QtQuick.Layouts as QtLayouts
+import org.kde.kirigami as Kirigami
 
 Kirigami.FormLayout {
 	id: layoutGeneral

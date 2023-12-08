@@ -16,18 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
-import org.kde.plasma.private.pager 2.0
+import QtQuick
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.private.pager
 
 Rectangle {
 	property alias text: numberText.text 
 	property bool fontSizeChecked: plasmoid.configuration.fontSizeChecked
 	property color fontColor: plasmoid.configuration.fontColorChecked ? 
-			plasmoid.configuration.fontColor : PlasmaCore.Theme.textColor
+			plasmoid.configuration.fontColor : Kirigami.Theme.textColor
 
 	border.width: plasmoid.configuration.displayBorder ? plasmoid.configuration.borderThickness : 0
 	radius: height > width ? height * (plasmoid.configuration.borderRadius / 100) : width * (plasmoid.configuration.borderRadius / 100)
@@ -39,7 +40,7 @@ Rectangle {
 		text: pagerModel.currentPage + 1
 		color: fontColor
 	 	font {
-			family: plasmoid.configuration.fontFamily || PlasmaCore.Theme.defaultFont.family
+			family: plasmoid.configuration.fontFamily || Kirigami.Theme.defaultFont.family
 			bold: plasmoid.configuration.fontBold
 			italic: plasmoid.configuration.fontItalic
 			pixelSize: fontSizeChecked ? plasmoid.configuration.fontSize : Math.min(parent.height*0.7, parent.width*0.7)

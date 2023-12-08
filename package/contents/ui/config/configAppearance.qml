@@ -18,15 +18,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.5
-import QtQuick.Controls 1.0 as QtControls1
-import QtQuick.Controls 2.5 as QtControls
-import QtQuick.Layouts 1.15 as QtLayouts
+import QtQuick
+import QtQuick.Controls as QtControls1
+import QtQuick.Controls as QtControls
+import QtQuick.Layouts as QtLayouts
 
-import org.kde.kirigami 2.5 as Kirigami
-import org.kde.kquickcontrols 2.0 as KQControls
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.kquickcontrols as KQControls
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.kirigami as Kirigami
 
 Kirigami.FormLayout {
 	id: layoutAppearance
@@ -181,7 +181,7 @@ Kirigami.FormLayout {
 	QtLayouts.RowLayout {
 		QtLayouts.Layout.fillWidth: true
 		Kirigami.FormData.label: i18n("Border color:")
-		spacing: PlasmaCore.Units.largeSpacing
+		spacing: Kirigami.Units.largeSpacing
 
 		KQControls.ColorButton {
 			id: borderColor

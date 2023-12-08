@@ -1,6 +1,8 @@
  # Compact Pager
 A compact pager for the [KDE Plasma desktop](https://kde.org/plasma-desktop/), for those who don't like how much space the normal plasma pager takes.
 
+For the Plasma 5 version, use the plasma5 branch.
+
 ![Full represtation in panel](https://user-images.githubusercontent.com/22967053/148304498-b7d3938b-4d0a-4559-89bd-3b68e561501d.png)
 ![Compact representation, expanded](https://user-images.githubusercontent.com/59516401/151219272-5a776f43-7f9c-4403-b942-079bb77a3e9c.jpg)
 

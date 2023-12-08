@@ -15,33 +15,35 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
+ * You should have received a copy of the GNU General Public License.
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
-import QtQuick.Layouts 1.1
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
-import org.kde.plasma.private.pager 2.0
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
+import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.private.pager
 
 import "./lib"
 
-Item {
+PlasmoidItem {
 	id: root
 
-	Plasmoid.switchHeight: switch(plasmoid.configuration.forceLayout) {
-							   case 0: return Math.floor(pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
-							   case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
-							   case 2: return 500 * PlasmaCore.Units.gridUnit //compactu
+	switchHeight: switch(plasmoid.configuration.forceLayout) {
+							   case 0: return Math.floor(pagerModel.layoutRows) * Kirigami.Units.gridUnit
+							   case 1: return 0.1 * Kirigami.Units.gridUnit //full
+							   case 2: return 500 * Kirigami.Units.gridUnit //compactu
 						   }
 
-	Plasmoid.switchWidth: switch(plasmoid.configuration.forceLayout) {
-							   case 0: return Math.floor(1.4 * pagerModel.count / pagerModel.layoutRows) * PlasmaCore.Units.gridUnit
-							   case 1: return 0.1 * PlasmaCore.Units.gridUnit //full
-							   case 2: return 500 * PlasmaCore.Units.gridUnit //compact
+	switchWidth: switch(plasmoid.configuration.forceLayout) {
+							   case 0: return Math.floor(1.4 * pagerModel.count / pagerModel.layoutRows) * Kirigami.Units.gridUnit
+							   case 1: return 0.1 * Kirigami.Units.gridUnit //full
+							   case 2: return 500 * Kirigami.Units.gridUnit //compact
 						  }
 
 	Plasmoid.status: (pagerModel.shouldShowPager || plasmoid.configuration.stayVisible) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
@@ -96,9 +98,9 @@ Item {
 		}
 	}
 
-	Plasmoid.compactRepresentation: CRep { }
+	compactRepresentation: CRep { }
 
-	Plasmoid.fullRepresentation: FRep { }
+	fullRepresentation: FRep { }
 
 	PagerModel {
 		id: pagerModel

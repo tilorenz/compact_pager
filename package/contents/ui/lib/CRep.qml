@@ -16,20 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.6
-import QtQuick.Layouts 1.1
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddonsComponents
-import org.kde.plasma.private.pager 2.0
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.private.pager
 
 
 Item {
 	id: compactLayout
 
 	property color fontColor: plasmoid.configuration.fontColorChecked ? 
-			plasmoid.configuration.fontColor : PlasmaCore.Theme.textColor
+			plasmoid.configuration.fontColor : Kirigami.Theme.textColor
 
 	Loader {
 		id: compLoader
@@ -39,7 +40,7 @@ Item {
 
 		sourceComponent: NumberBox {
 			color: plasmoid.configuration.activeBgColorChecked ?
-					plasmoid.configuration.activeBgColor : PlasmaCore.Theme.backgroundColor
+					plasmoid.configuration.activeBgColor : Kirigami.Theme.backgroundColor
 			border.color: plasmoid.configuration.sameBorderColorAsFont ? 
 					fontColor : plasmoid.configuration.borderColor
 		}

@@ -95,7 +95,6 @@
         "Version": "2.0",
         "Website": "https://github.com/tilorenz/compact_pager"
     },
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-Provides": [
         "org.kde.plasma.virtualdesktops"
