@@ -92,7 +92,7 @@
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "2.0",
+        "Version": "3.0",
         "Website": "https://github.com/tilorenz/compact_pager"
     },
     "X-Plasma-MainScript": "ui/main.qml",
