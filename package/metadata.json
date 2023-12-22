@@ -86,16 +86,16 @@
         "Description[zh_TW]": "在虛擬桌面間切換",
         "EnabledByDefault": true,
         "Icon": "user-desktop",
-        "Id": "com.github.tilorenz.compact_pager",
+        "Id": "com.github.tilorenz.compact_pager6",
         "License": "GPL-3.0+",
-        "Name": "Compact Pager",
+        "Name": "Compact Pager 6",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "3.0",
+        "Version": "3.1",
         "Website": "https://github.com/tilorenz/compact_pager"
     },
-    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-Minimum-Version": "6.0",
     "X-Plasma-Provides": [
         "org.kde.plasma.virtualdesktops"
     ]
