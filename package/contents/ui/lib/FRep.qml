@@ -91,7 +91,7 @@ GridLayout {
 				onClicked: {
 					pagerModel.changePage(model.index)
 					//TODO maybe add option for this
-					plasmoid.expanded = false
+					root.expanded = false
 				}
 				onWheel: (wheel) => { plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : {} }
 			}

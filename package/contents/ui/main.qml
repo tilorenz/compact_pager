@@ -40,7 +40,7 @@ PlasmoidItem {
 	switchHeight: switch(plasmoid.configuration.forceLayout) {
 							   case 0: return Math.floor(pagerModel.layoutRows) * Kirigami.Units.gridUnit
 							   case 1: return 0.1 * Kirigami.Units.gridUnit //full
-							   case 2: return 500 * Kirigami.Units.gridUnit //compactu
+							   case 2: return 500 * Kirigami.Units.gridUnit //compact
 						   }
 
 	switchWidth: switch(plasmoid.configuration.forceLayout) {
