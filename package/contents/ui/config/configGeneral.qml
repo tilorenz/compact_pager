@@ -22,12 +22,10 @@ import QtQuick
 import QtQuick.Controls as QtControls
 import QtQuick.Layouts as QtLayouts
 import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
 
-Kirigami.FormLayout {
-	id: layoutGeneral
-
-	anchors.left: parent.left
-	anchors.right: parent.right
+KCM.SimpleKCM {
+	id: layoutGeneralRoot
 
 	property alias cfg_forceLayout: pagerLayout.currentIndex
 	property alias cfg_enableScrolling: enableScrolling.checked
@@ -35,53 +33,60 @@ Kirigami.FormLayout {
 	property alias cfg_currentDesktopSelected: currentDesktopSelectedBox.currentIndex
 	property alias cfg_stayVisible: stayVisible.checked
 
-	QtControls.CheckBox {
-		id: stayVisible
-		text: i18n("Stay visible when there is only one virtual desktop")
-	}
+	Kirigami.FormLayout {
+		id: layoutGeneral
 
-	QtControls.CheckBox {
-		id: enableScrolling
-		text: i18n("Enable scrolling to change the active desktop")
-	}
+		//anchors.fill: parent
 
-	QtControls.CheckBox {
-		id: wrapPage
-		enabled: cfg_enableScrolling
-		text: i18n("Navigation wraps around")
-	}
 
-	Item {
-		Kirigami.FormData.isSection: true
-	}
+		QtControls.CheckBox {
+			id: stayVisible
+			text: i18n("Stay visible when there is only one virtual desktop")
+		}
 
-	QtLayouts.RowLayout {
-		QtLayouts.Layout.fillWidth: true
+		QtControls.CheckBox {
+			id: enableScrolling
+			text: i18n("Enable scrolling to change the active desktop")
+		}
 
-		Kirigami.FormData.label: i18n("Layout:")
+		QtControls.CheckBox {
+			id: wrapPage
+			enabled: cfg_enableScrolling
+			text: i18n("Navigation wraps around")
+		}
+
+		Item {
+			Kirigami.FormData.isSection: true
+		}
+
+		QtLayouts.RowLayout {
+			QtLayouts.Layout.fillWidth: true
+
+			Kirigami.FormData.label: i18n("Layout:")
+			QtControls.ComboBox {
+				id: pagerLayout
+				model: ["Adaptive", "Full", "Compact"]
+			}
+
+			QtControls.Button {
+				id: infoButton
+				icon.name: "dialog-information"
+				QtControls.ToolTip.visible: hovered
+				QtControls.ToolTip.text: "<b>Adaptive</b>:<br>Switch the layout depending on available space.<br><br>" +
+										 "<b>Full</b>:<br>Always show full layout.<br><br>" +
+										 "<b>Compact</b>:<br>Always show compact layout."
+			}
+		}
+
+		Item {
+			Kirigami.FormData.isSection: true
+		}
+
 		QtControls.ComboBox {
-			id: pagerLayout
-			model: ["Adaptive", "Full", "Compact"]
+			id: currentDesktopSelectedBox
+			Kirigami.FormData.label: i18n("Selecting current virtual desktop:")
+
+			model: ["Does nothing", "Shows the desktop"]
 		}
-
-		QtControls.Button {
-			id: infoButton
-			icon.name: "dialog-information"
-			QtControls.ToolTip.visible: hovered
-			QtControls.ToolTip.text: "<b>Adaptive</b>:<br>Switch the layout depending on available space.<br><br>" +
-			                         "<b>Full</b>:<br>Always show full layout.<br><br>" +
-									 "<b>Compact</b>:<br>Always show compact layout."
-		}
-	}
-
-	Item {
-		Kirigami.FormData.isSection: true
-	}
-
-	QtControls.ComboBox {
-		id: currentDesktopSelectedBox
-		Kirigami.FormData.label: i18n("Selecting current virtual desktop:")
-
-		model: ["Does nothing", "Shows the desktop"]
 	}
 }
