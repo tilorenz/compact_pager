@@ -1,4 +1,5 @@
 {
+	"KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -89,9 +90,6 @@
         "Id": "com.github.tilorenz.compact_pager6",
         "License": "GPL-3.0+",
         "Name": "Compact Pager 6",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "3.1",
         "Website": "https://github.com/tilorenz/compact_pager"
     },
