@@ -93,7 +93,7 @@
         "Version": "3.1",
         "Website": "https://github.com/tilorenz/compact_pager"
     },
-    "X-Plasma-Minimum-Version": "6.0",
+    "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-Provides": [
         "org.kde.plasma.virtualdesktops"
     ]
