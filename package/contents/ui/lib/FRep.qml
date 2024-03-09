@@ -89,7 +89,11 @@ GridLayout {
 			MouseArea {
 				anchors.fill: parent
 				onClicked: {
-					pagerModel.changePage(model.index)
+					if (plasmoid.configuration.currentDesktopSelected === 2 && model.index === pagerModel.currentPage) {
+						runOverview()
+					} else {
+						pagerModel.changePage(model.index)
+					}
 					//TODO maybe add option for this
 					root.expanded = false
 				}

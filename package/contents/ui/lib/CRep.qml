@@ -53,6 +53,13 @@ Item {
 	}
 	MouseArea {
 		anchors.fill: parent
-		onClicked: root.expanded = !root.expanded
+		onClicked: {
+			if (plasmoid.configuration.overviewCompactLayout) {
+				runOverview()
+			} else {
+				root.expanded = !root.expanded
+			}
+		}
+		onWheel: (wheel) => { plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : {} }
 	}
 }

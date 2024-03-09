@@ -25,12 +25,13 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
-import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.pager
 import org.kde.kcmutils as KCM
 import org.kde.config as KConfig
+
+import org.kde.plasma.plasma5support as Plasma5Support
 
 import "./lib"
 
@@ -63,6 +64,10 @@ PlasmoidItem {
 
 	function action_openKCM() {
 		KQuickControlsAddonsComponents.KCMShell.openSystemSettings("kcm_kwin_virtualdesktops");
+	}
+
+	function runOverview() {
+		executable.exec('qdbus org.kde.kglobalaccel /component/kwin invokeShortcut Overview')
 	}
 
 	function switchDesktop(wheel) {
@@ -123,6 +128,19 @@ PlasmoidItem {
 		screenGeometry: root.screenGeometry
 
 		pagerType: PagerModel.VirtualDesktops
+	}
+
+	Plasma5Support.DataSource {
+		id: executable
+		engine: "executable"
+		connectedSources: []
+		onNewData: function(source, data) {
+			disconnectSource(source)
+		}
+
+		function exec(cmd) {
+			executable.connectSource(cmd)
+		}
 	}
 
     Plasmoid.contextualActions: [
