@@ -101,6 +101,13 @@ PlasmoidItem {
 		}
 	}
 
+	MouseArea {
+		id: rootMouseArea
+		anchors.fill: parent
+
+		onWheel: wheel => { plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : {} }
+	}
+
 	compactRepresentation: CRep { }
 
 	fullRepresentation: FRep { }
