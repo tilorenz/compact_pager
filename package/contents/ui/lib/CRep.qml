@@ -64,6 +64,5 @@ Item {
 				root.expanded = !root.expanded
 			}
 		}
-		onWheel: (wheel) => { plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : {} }
 	}
 }
