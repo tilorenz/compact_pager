@@ -18,8 +18,8 @@
 			<label>Whether to wrap page when navigating with pager</label>
 			<default>true</default>
 		</entry>
-		<entry name="overviewCompactLayout" type="Bool">
-			<label>Whether to directly open the overview in compact layout</label>
+		<entry name="actionOnCompactLayout" type="Bool">
+			<label>Whether to directly show the overview / desktop in compact layout</label>
 			<default>false</default>
 		</entry>
 		<entry name="currentDesktopSelected" type="Enum">

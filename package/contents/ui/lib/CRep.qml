@@ -54,8 +54,12 @@ Item {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-			if (plasmoid.configuration.overviewCompactLayout) {
-				runOverview()
+			if (plasmoid.configuration.currentDesktopSelected !== 0 && plasmoid.configuration.actionOnCompactLayout) {
+				if (plasmoid.configuration.currentDesktopSelected === 1) { // show desktop
+						pagerModel.changePage(pagerModel.currentPage)
+				} else {
+					runOverview()
+				}
 			} else {
 				root.expanded = !root.expanded
 			}

@@ -31,7 +31,7 @@ KCM.SimpleKCM {
 	property alias cfg_enableScrolling: enableScrolling.checked
 	property alias cfg_wrapPage: wrapPage.checked
 	property alias cfg_currentDesktopSelected: currentDesktopSelectedBox.currentIndex
-	property alias cfg_overviewCompactLayout: overviewCompactLayout.checked
+	property alias cfg_actionOnCompactLayout: actionOnCompactLayout.checked
 	property alias cfg_stayVisible: stayVisible.checked
 
 	Kirigami.FormLayout {
@@ -91,9 +91,9 @@ KCM.SimpleKCM {
 		}
 
 		QtControls.CheckBox {
-			id: overviewCompactLayout
-			enabled: cfg_currentDesktopSelected === 2
-			text: i18n("Directly open overview in compact layout")
+			id: actionOnCompactLayout
+			enabled: cfg_currentDesktopSelected !== 0
+			text: i18n("Directly show overview / desktop in compact layout")
 		}
 	}
 }
