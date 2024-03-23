@@ -55,16 +55,35 @@ GridLayout {
 		borderColorHighlight.a
 	)
 
-	columns: {
-		let isVertical = height > width;
-		// If there's not enough vertical space, show in one row
-		if (!isVertical && height < 40) {
-			return pagerModel.count
-		// If there's not enough horizontal space, show in one column
-		} else if (isVertical && width < 60) {
-			return 1
-		}
+	function modelColumns() {
 		return Math.ceil(pagerModel.count / pagerModel.layoutRows)
+	}
+
+	// if we have the space to lay the desktops out like the model says
+	function properLayoutFits(cols) {
+		let wantedWidth = 20 * cols
+		let wantedHeight = 20 * pagerModel.layoutRows
+		return width >= wantedWidth && height >= wantedHeight
+	}
+
+	columns: {
+		let cols = modelColumns()
+
+		switch (Plasmoid.formFactor) {
+			// for vertical and horizontal panels, we ignore the height and width, respectively
+			// since the plasmoid can scale in those directions
+			case 2: { // horizontal
+				let availableRows = Math.floor(height / 20)
+				let targetRows = Math.max(Math.min(availableRows, pagerModel.layoutRows), 1)
+				return Math.ceil(pagerModel.count / targetRows)
+			}
+			case 3: { // vertical
+				let availableColumns = Math.floor(width / 20)
+				return Math.max(Math.min(availableColumns, cols), 1)
+			}
+			default:
+				return cols
+		}
 	}
 
 	Repeater {
@@ -76,10 +95,10 @@ GridLayout {
 			text: index + 1
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			Layout.preferredWidth: 40
-			Layout.preferredHeight: Layout.preferredWidth
+			//Layout.preferredWidth: 40
+			//Layout.preferredHeight: Layout.preferredWidth
 			Layout.minimumWidth: 18
-			Layout.minimumHeight: Layout.minimumWidth
+			Layout.minimumHeight: 18
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
 			//highlight the current desktop
