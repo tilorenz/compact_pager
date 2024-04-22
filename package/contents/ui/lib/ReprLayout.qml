@@ -27,7 +27,7 @@ import org.kde.plasma.private.pager
 
 
 GridLayout {
-	id: fullLayout
+	id: reprLayout
 	property bool isFullRep: true
 
 	property color bgColorHighlight: plasmoid.configuration.activeBgColorChecked ?
@@ -111,7 +111,7 @@ GridLayout {
 
 		NumberBox {
 			id: nBox
-			visible: fullLayout.shouldShowFullLayout || index === pagerModel.currentPage
+			visible: reprLayout.shouldShowFullLayout || index === pagerModel.currentPage
 			text: plasmoid.configuration.showDesktopNames ? model.display : index + 1
 			Layout.fillWidth: true
 			Layout.fillHeight: true
@@ -129,7 +129,7 @@ GridLayout {
 					// when clicking on the desktop we're already on
 					if (model.index === pagerModel.currentPage) {
 						// ...and we're in full layout or configured to do an action in compact layout...
-						if (fullLayout.shouldShowFullLayout || plasmoid.configuration.actionOnCompactLayout) {
+						if (reprLayout.shouldShowFullLayout || plasmoid.configuration.actionOnCompactLayout) {
 							// do some action
 							switch (plasmoid.configuration.currentDesktopSelected) {
 								case 0: // do nothing

@@ -102,10 +102,10 @@ PlasmoidItem {
 	}
 
 	preferredRepresentation: compactRepresentation
-	compactRepresentation: FRep {
+	compactRepresentation: ReprLayout {
 		isFullRep: false
 	}
-	fullRepresentation: FRep {
+	fullRepresentation: ReprLayout {
 		isFullRep: true
 	}
 
