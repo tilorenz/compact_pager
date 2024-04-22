@@ -1,7 +1,7 @@
 /*
  * Copyright 2013  David Edmundson <davidedmundson@kde.org>
  * Copyright 2016  Eike Hein <hein@kde.org>
- * Copyright 2021  Tino Lorenz <tilrnz@gmx.net>
+ * Copyright 2021-2024  Tino Lorenz <tilrnz@gmx.net>
  * Copyright 2022  Diego Miguel <hello@diegomiguel.me>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -33,12 +33,17 @@ KCM.SimpleKCM {
 	property alias cfg_currentDesktopSelected: currentDesktopSelectedBox.currentIndex
 	property alias cfg_actionOnCompactLayout: actionOnCompactLayout.checked
 	property alias cfg_stayVisible: stayVisible.checked
+	property alias cfg_showDesktopNames: showDesktopNames.checked
 
 	Kirigami.FormLayout {
 		id: layoutGeneral
 
 		//anchors.fill: parent
 
+		QtControls.CheckBox {
+			id: showDesktopNames
+			text: i18n("Show Desktop names rather than numbers")
+		}
 
 		QtControls.CheckBox {
 			id: stayVisible
@@ -92,8 +97,7 @@ KCM.SimpleKCM {
 
 		QtControls.CheckBox {
 			id: actionOnCompactLayout
-			enabled: cfg_currentDesktopSelected !== 0
-			text: i18n("Directly show overview / desktop in compact layout")
+			text: i18n("Directly do selected action in compact layout\ninstead of expanding full layout")
 		}
 	}
 }

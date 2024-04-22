@@ -38,18 +38,6 @@ import "./lib"
 PlasmoidItem {
 	id: root
 
-	switchHeight: switch(plasmoid.configuration.forceLayout) {
-							   case 0: return Math.floor(pagerModel.layoutRows) * Kirigami.Units.gridUnit
-							   case 1: return 0.1 * Kirigami.Units.gridUnit //full
-							   case 2: return 500 * Kirigami.Units.gridUnit //compact
-						   }
-
-	switchWidth: switch(plasmoid.configuration.forceLayout) {
-							   case 0: return Math.floor(1.4 * pagerModel.count / pagerModel.layoutRows) * Kirigami.Units.gridUnit
-							   case 1: return 0.1 * Kirigami.Units.gridUnit //full
-							   case 2: return 500 * Kirigami.Units.gridUnit //compact
-						  }
-
 	Plasmoid.status: (pagerModel.shouldShowPager || plasmoid.configuration.stayVisible) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
 
 	property int wheelDelta: 0
@@ -113,9 +101,13 @@ PlasmoidItem {
 		onWheel: wheel => { plasmoid.configuration.enableScrolling ? switchDesktop(wheel) : {} }
 	}
 
-	compactRepresentation: CRep { }
-
-	fullRepresentation: FRep { }
+	preferredRepresentation: compactRepresentation
+	compactRepresentation: FRep {
+		isFullRep: false
+	}
+	fullRepresentation: FRep {
+		isFullRep: true
+	}
 
 	PagerModel {
 		id: pagerModel

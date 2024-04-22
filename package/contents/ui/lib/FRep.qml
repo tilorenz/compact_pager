@@ -1,5 +1,5 @@
 /*
- * Copyright 2021  Tino Lorenz <tilrnz@gmx.net>
+ * Copyright 2021-2024  Tino Lorenz <tilrnz@gmx.net>
  * Copyright 2022  Diego Miguel <hello@diegomiguel.me>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,6 +28,7 @@ import org.kde.plasma.private.pager
 
 GridLayout {
 	id: fullLayout
+	property bool isFullRep: true
 
 	property color bgColorHighlight: plasmoid.configuration.activeBgColorChecked ?
 			plasmoid.configuration.activeBgColor : Kirigami.Theme.backgroundColor
@@ -66,8 +67,26 @@ GridLayout {
 		return width >= wantedWidth && height >= wantedHeight
 	}
 
+	property bool shouldShowFullLayout: {
+		if (isFullRep) {
+			return true
+		}
+		switch (plasmoid.configuration.forceLayout) {
+			case 0: return properLayoutFits(modelColumns()) // adaptive
+			case 1: return true // full
+			case 2: return false // compact
+		}
+	}
+
+
 	columns: {
 		let cols = modelColumns()
+
+		// names are larger and don't all have equal width, so there's no point even
+		// trying to figure out if it would fit
+		if (plasmoid.configuration.showDesktopNames) {
+			return cols
+		}
 
 		switch (Plasmoid.formFactor) {
 			// for vertical and horizontal panels, we ignore the height and width, respectively
@@ -92,13 +111,12 @@ GridLayout {
 
 		NumberBox {
 			id: nBox
-			text: index + 1
+			visible: fullLayout.shouldShowFullLayout || index === pagerModel.currentPage
+			text: plasmoid.configuration.showDesktopNames ? model.display : index + 1
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			//Layout.preferredWidth: 40
-			//Layout.preferredHeight: Layout.preferredWidth
-			Layout.minimumWidth: 18
-			Layout.minimumHeight: 18
+			Layout.minimumWidth: implicitWidth
+			Layout.preferredWidth: Math.max(implicitWidth, height)
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
 			//highlight the current desktop
@@ -108,13 +126,29 @@ GridLayout {
 			MouseArea {
 				anchors.fill: parent
 				onClicked: {
-					if (plasmoid.configuration.currentDesktopSelected === 2 && model.index === pagerModel.currentPage) {
-						runOverview()
+					// when clicking on the desktop we're already on
+					if (model.index === pagerModel.currentPage) {
+						// ...and we're in full layout or configured to do an action in compact layout...
+						if (fullLayout.shouldShowFullLayout || plasmoid.configuration.actionOnCompactLayout) {
+							// do some action
+							switch (plasmoid.configuration.currentDesktopSelected) {
+								case 0: // do nothing
+									break;
+								case 1: // show desktop
+									pagerModel.changePage(pagerModel.currentPage)
+									break;
+								case 2:
+									runOverview()
+									break;
+							}
+							root.expanded = false
+						} else {
+							root.expanded = !root.expanded
+						}
 					} else {
 						pagerModel.changePage(model.index)
+						root.expanded = false
 					}
-					//TODO maybe add option for this
-					root.expanded = false
 				}
 			}
 		}
