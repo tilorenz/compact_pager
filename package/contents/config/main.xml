@@ -117,6 +117,14 @@
 			<label>The color of the desktop rectangle background.</label>
 			<default>#222222</default>
 		</entry>
+		<entry name="showWindowIndicator" type="Bool">
+			<label>Show a little rectangle if a window is open on the desktop</label>
+			<default>false</default>
+		</entry>
+		<entry name="windowIndicatorRadius" type="Int">
+			<label>The radius of the borders of the window indicator.</label>
+			<default>25</default>
+		</entry>
 	</group>
 
 </kcfg>

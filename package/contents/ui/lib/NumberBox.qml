@@ -25,23 +25,39 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.pager
 
 Rectangle {
+	id: numberBox
 	property alias text: numberText.text 
 	property bool fontSizeChecked: plasmoid.configuration.fontSizeChecked
 	property color fontColor: plasmoid.configuration.fontColorChecked ? 
 			plasmoid.configuration.fontColor : Kirigami.Theme.textColor
+	property bool showWindowIndicator: true
 
 	border.width: plasmoid.configuration.displayBorder ? plasmoid.configuration.borderThickness : 0
 	radius: height > width ? height * (plasmoid.configuration.borderRadius / 100) : width * (plasmoid.configuration.borderRadius / 100)
 
-	implicitWidth: numberText.width + 10
+	implicitWidth: numberText.width + 10 // + (showWindowIndicator ? 14 : 0)
+
+	Rectangle {
+		id: windowIndicator
+		visible: numberBox.showWindowIndicator
+
+		anchors.left: numberText.right
+		anchors.top: numberText.top
+
+		width: 8
+		height: 8
+		border.color: numberBox.fontColor
+		border.width: 1
+		color: "transparent"
+		radius: width * (plasmoid.configuration.windowIndicatorRadius / 100)
+	}
 
 	Text {
 		id: numberText
-
 		anchors.centerIn: parent
 		text: pagerModel.currentPage + 1
 		color: fontColor
-	 	font {
+		font {
 			family: plasmoid.configuration.fontFamily || Kirigami.Theme.defaultFont.family
 			bold: plasmoid.configuration.fontBold
 			italic: plasmoid.configuration.fontItalic

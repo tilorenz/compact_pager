@@ -119,6 +119,14 @@ GridLayout {
 			Layout.preferredWidth: Math.max(implicitWidth, height)
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
+			// this is horrible, is there really no other way to do this in qml???
+			Repeater {
+				id: proxyRepeater
+				model: TasksModel
+				Rectangle { visible: false }
+			}
+			showWindowIndicator: plasmoid.configuration.showWindowIndicator && proxyRepeater.count > 0
+
 			//highlight the current desktop
 			color: index === pagerModel.currentPage ? bgColorHighlight : bgColor
 			border.color: index === pagerModel.currentPage ? borderColorHighlight : borderColor
