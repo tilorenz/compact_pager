@@ -112,7 +112,8 @@ GridLayout {
 		NumberBox {
 			id: nBox
 			visible: reprLayout.shouldShowFullLayout || index === pagerModel.currentPage
-			text: plasmoid.configuration.showDesktopNames ? model.display : index + 1
+			// TODO fix in plasma
+			text: (plasmoid.configuration.showDesktopNames && model.display != "") ? model.display : index + 1
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.minimumWidth: implicitWidth
