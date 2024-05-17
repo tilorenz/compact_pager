@@ -47,6 +47,8 @@ KCM.SimpleKCM {
 	property alias cfg_activeBgColor: activeBgColorValue.color
 	property alias cfg_inactiveBgColorChecked: fixedInactiveBGColor.checked
 	property alias cfg_inactiveBgColor: inactiveBgColorValue.color
+	property alias cfg_inactiveBgColorWithoutWindowsChecked: fixedInactiveBGColorWithoutWindows.checked
+	property alias cfg_inactiveBgColorWithoutWindows: inactiveBgColorWithoutWindowsValue.color
 	property alias cfg_showWindowIndicator: showWindowIndicator.checked
 	property alias cfg_windowIndicatorRadius: windowIndicatorRadius.value
 
@@ -250,6 +252,21 @@ KCM.SimpleKCM {
 				id: inactiveBgColorValue
 				showAlphaChannel: true
 				enabled: fixedInactiveBGColor.checked
+			}
+		}
+
+		QtLayouts.RowLayout {
+			QtLayouts.Layout.fillWidth: true
+			Kirigami.FormData.label: i18n("Fixed inactive background color without windows:")
+
+			QtControls.CheckBox {
+				id: fixedInactiveBGColorWithoutWindows
+			}
+
+			KQControls.ColorButton {
+				id: inactiveBgColorWithoutWindowsValue
+				showAlphaChannel: true
+				enabled: fixedInactiveBGColorWithoutWindows.checked
 			}
 		}
 

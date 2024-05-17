@@ -45,6 +45,8 @@ GridLayout {
 			Math.max(0, bgColorHighlight.b * 0.65),
 			bgColorHighlight.a
 		)
+	property color bgColorWithoutWindows: plasmoid.configuration.inactiveBgColorWithoutWindowsChecked ?
+		plasmoid.configuration.inactiveBgColorWithoutWindows : bgColor
 	property color borderColorHighlight: plasmoid.configuration.sameBorderColorAsFont ? 
 			fontColor : plasmoid.configuration.borderColor
 
@@ -129,7 +131,8 @@ GridLayout {
 			showWindowIndicator: plasmoid.configuration.showWindowIndicator && proxyRepeater.count > 0
 
 			//highlight the current desktop
-			color: index === pagerModel.currentPage ? bgColorHighlight : bgColor
+			color: index === pagerModel.currentPage ? bgColorHighlight :
+				((proxyRepeater.count > 0) ? bgColor : bgColorWithoutWindows)
 			border.color: index === pagerModel.currentPage ? borderColorHighlight : borderColor
 
 			MouseArea {

@@ -117,6 +117,14 @@
 			<label>The color of the desktop rectangle background.</label>
 			<default>#222222</default>
 		</entry>
+		<entry name="inactiveBgColorWithoutWindowsChecked" type="Bool">
+			<label>Whether to use a custom background color.</label>
+			<default>false</default>
+		</entry>
+		<entry name="inactiveBgColorWithoutWindows" type="Color">
+			<label>The color of the desktop rectangle background.</label>
+			<default>#222222</default>
+		</entry>
 		<entry name="showWindowIndicator" type="Bool">
 			<label>Show a little rectangle if a window is open on the desktop</label>
 			<default>false</default>
