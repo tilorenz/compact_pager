@@ -119,6 +119,8 @@ GridLayout {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.minimumWidth: implicitWidth
+			Layout.preferredHeight: implicitHeight
+			Layout.minimumHeight: 20
 			Layout.preferredWidth: Math.max(implicitWidth, height)
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 

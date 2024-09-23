@@ -35,7 +35,14 @@ Rectangle {
 	border.width: plasmoid.configuration.displayBorder ? plasmoid.configuration.borderThickness : 0
 	radius: height > width ? height * (plasmoid.configuration.borderRadius / 100) : width * (plasmoid.configuration.borderRadius / 100)
 
-	implicitWidth: numberText.width + 10 // + (showWindowIndicator ? 14 : 0)
+	TextMetrics {
+		id: textMet
+		text: numberText.text
+		font: numberText.font
+	}
+
+	implicitWidth: Math.max(textMet.width + 10, 18)
+	implicitHeight: textMet.height + 6
 
 	Rectangle {
 		id: windowIndicator
