@@ -1,7 +1,7 @@
 /*
  * Copyright 2013  Heena Mahour <heena393@gmail.com>
  * Copyright 2013  Sebastian Kügler <sebas@kde.org>
- * Copyright 2021  Tino Lorenz <tilrnz@gmx.net>
+ * Copyright 2021-2024  Tino Lorenz <tilrnz@gmx.net>
  * Copyright 2022  Diego Miguel <hello@diegomiguel.me>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -108,7 +108,7 @@ KCM.SimpleKCM {
 				QtLayouts.Layout.fillWidth: true
 				currentIndex: 0
 				// ComboBox's sizing is just utterly broken
-				QtLayouts.Layout.minimumWidth: units.gridUnit * 10
+				QtLayouts.Layout.minimumWidth: Kirigami.Units.gridUnit * 10
 				model: fontsModel
 				// Doesn't autodeduce from model because we manually populate it
 				textRole: "text"
