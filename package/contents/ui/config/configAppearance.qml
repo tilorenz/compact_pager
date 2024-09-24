@@ -108,7 +108,7 @@ KCM.SimpleKCM {
 				QtLayouts.Layout.fillWidth: true
 				currentIndex: 0
 				// ComboBox's sizing is just utterly broken
-				QtLayouts.Layout.minimumWidth: units.gridUnit * 10
+				QtLayouts.Layout.minimumWidth: Kirigami.Units.gridUnit * 10
 				model: fontsModel
 				// Doesn't autodeduce from model because we manually populate it
 				textRole: "text"
