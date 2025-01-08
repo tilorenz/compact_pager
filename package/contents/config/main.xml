@@ -10,6 +10,10 @@
 			<label>Show Desktop names rather than numbers</label>
 			<default>false</default>
 		</entry>
+		<entry name="showWindowIcons" type="Bool">
+			<label>Show window icons rather than numbers</label>
+			<default>false</default>
+		</entry>
 		<entry name="stayVisible" type="Bool">
 			<label>Whether to stay visible when there is only one virtual desktop</label>
 			<default>true</default>

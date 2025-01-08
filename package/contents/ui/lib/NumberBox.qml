@@ -17,6 +17,7 @@
  */
 
 import QtQuick
+import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
@@ -31,6 +32,7 @@ Rectangle {
 	property color fontColor: plasmoid.configuration.fontColorChecked ? 
 			plasmoid.configuration.fontColor : Kirigami.Theme.textColor
 	property bool showWindowIndicator: true
+	property list<var> iconSources: []
 
 	border.width: plasmoid.configuration.displayBorder ? plasmoid.configuration.borderThickness : 0
 	radius: height > width ? height * (plasmoid.configuration.borderRadius / 100) : width * (plasmoid.configuration.borderRadius / 100)
@@ -61,6 +63,7 @@ Rectangle {
 
 	Text {
 		id: numberText
+		visible: !plasmoid.configuration.showWindowIcons
 		anchors.centerIn: parent
 		text: pagerModel.currentPage + 1
 		color: fontColor
@@ -71,4 +74,39 @@ Rectangle {
 			pixelSize: fontSizeChecked ? plasmoid.configuration.fontSize : Math.min(parent.height*0.7, parent.width*0.7)
 		}
 	}
+
+	Grid {
+		id: iconGrid
+		anchors.centerIn: parent
+		visible: plasmoid.configuration.showWindowIcons
+
+		readonly property int maxIconCount: 3
+		readonly property bool showIconsInColumn: numberBox.height > numberBox.width
+		readonly property bool showAllIcons: numberBox.iconSources.length <= maxIconCount
+		readonly property int iconSize: Math.min(numberBox.height * 0.7, numberBox.width * 0.7)
+
+		columns: showIconsInColumn ? 1 : maxIconCount
+		rows: showIconsInColumn ? maxIconCount : 1
+		flow: showIconsInColumn ? Grid.TopToBottom : Grid.LeftToRight
+
+		component BoxIcon: Kirigami.Icon {
+			height: iconGrid.iconSize
+			width: iconGrid.iconSize
+			roundToIconSize: false
+		}
+
+		Repeater {
+			model: numberBox.iconSources
+			BoxIcon {
+				visible: iconGrid.showAllIcons
+				source: modelData
+			}
+		}
+
+		BoxIcon {
+			visible: !iconGrid.showAllIcons
+			source: iconGrid.showIconsInColumn ? "view-more-symbolic" : "view-more-horizontal-symbolic"
+		}
+	}
+
 }

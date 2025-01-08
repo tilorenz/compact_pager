@@ -34,6 +34,7 @@ KCM.SimpleKCM {
 	property alias cfg_actionOnCompactLayout: actionOnCompactLayout.checked
 	property alias cfg_stayVisible: stayVisible.checked
 	property alias cfg_showDesktopNames: showDesktopNames.checked
+	property alias cfg_showWindowIcons: showWindowIcons.checked
 
 	Kirigami.FormLayout {
 		id: layoutGeneral
@@ -43,6 +44,11 @@ KCM.SimpleKCM {
 		QtControls.CheckBox {
 			id: showDesktopNames
 			text: i18n("Show Desktop names rather than numbers")
+		}
+
+		QtControls.CheckBox {
+			id: showWindowIcons
+			text: i18n("Show window icons rather than numbers")
 		}
 
 		QtControls.CheckBox {

@@ -128,9 +128,22 @@ GridLayout {
 			Repeater {
 				id: proxyRepeater
 				model: TasksModel
-				Rectangle { visible: false }
+				Item {
+					visible: false
+					property var iconSource: model.decoration
+				}
 			}
+
 			showWindowIndicator: plasmoid.configuration.showWindowIndicator && proxyRepeater.count > 0
+
+			iconSources: {
+				const result = [];
+				for (let i = 0; i < proxyRepeater.count; i++) {
+					const taskProxy = proxyRepeater.itemAt(i);
+					result.push(taskProxy.iconSource);
+				}
+				return result;
+			}
 
 			//highlight the current desktop
 			color: index === pagerModel.currentPage ? bgColorHighlight :
@@ -165,6 +178,10 @@ GridLayout {
 					}
 				}
 			}
+		}
+
+		Component.onCompleted: {
+			pagerModel.showOnlyCurrentScreen = true;
 		}
 	}
 }
