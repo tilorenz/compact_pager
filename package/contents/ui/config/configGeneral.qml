@@ -42,16 +42,6 @@ KCM.SimpleKCM {
 		//anchors.fill: parent
 
 		QtControls.CheckBox {
-			id: showDesktopNames
-			text: i18n("Show Desktop names rather than numbers")
-		}
-
-		QtControls.CheckBox {
-			id: showWindowIcons
-			text: i18n("Show window icons rather than numbers")
-		}
-
-		QtControls.CheckBox {
 			id: stayVisible
 			text: i18n("Stay visible when there is only one virtual desktop")
 		}
@@ -65,6 +55,31 @@ KCM.SimpleKCM {
 			id: wrapPage
 			enabled: cfg_enableScrolling
 			text: i18n("Navigation wraps around")
+		}
+
+		Item {
+			Kirigami.FormData.isSection: true
+		}
+
+		QtControls.ButtonGroup {
+			buttons: [showDesktopNumbers, showDesktopNames, showWindowIcons]
+		}
+
+		QtControls.RadioButton {
+			id: showDesktopNumbers
+			Kirigami.FormData.label: i18n("What to show in box:")
+			text: i18n("Show desktop numbers")
+			checked: !showDesktopNames.checked && !showWindowIcons.checked
+		}
+
+		QtControls.RadioButton {
+			id: showDesktopNames
+			text: i18n("Show desktop names")
+		}
+
+		QtControls.RadioButton {
+			id: showWindowIcons
+			text: i18n("Show window icons")
 		}
 
 		Item {
