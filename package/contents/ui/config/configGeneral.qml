@@ -35,6 +35,7 @@ KCM.SimpleKCM {
 	property alias cfg_stayVisible: stayVisible.checked
 	property alias cfg_showDesktopNames: showDesktopNames.checked
 	property alias cfg_showWindowIcons: showWindowIcons.checked
+	property alias cfg_showOnlyCurrentScreen: showOnlyCurrentScreen.checked
 
 	Kirigami.FormLayout {
 		id: layoutGeneral
@@ -55,6 +56,11 @@ KCM.SimpleKCM {
 			id: wrapPage
 			enabled: cfg_enableScrolling
 			text: i18n("Navigation wraps around")
+		}
+
+		QtControls.CheckBox {
+			id: showOnlyCurrentScreen
+			text: i18n("Only show windows from current Screen in pager")
 		}
 
 		Item {

@@ -14,6 +14,10 @@
 			<label>Show window icons rather than numbers</label>
 			<default>false</default>
 		</entry>
+		<entry name="showOnlyCurrentScreen" type="Bool">
+			<label>Only show windows from current Screen in pager</label>
+			<default>false</default>
+		</entry>
 		<entry name="stayVisible" type="Bool">
 			<label>Whether to stay visible when there is only one virtual desktop</label>
 			<default>true</default>

@@ -179,9 +179,5 @@ GridLayout {
 				}
 			}
 		}
-
-		Component.onCompleted: {
-			pagerModel.showOnlyCurrentScreen = true;
-		}
 	}
 }
