@@ -85,7 +85,7 @@
         "Description[x-test]": "xxSwitch between virtual desktopsxx",
         "Description[zh_CN]": "在虚拟桌面间切换",
         "Description[zh_TW]": "在虛擬桌面間切換",
-        "EnabledByDefault": true,
+        "EnabledByDefault": false,
         "Icon": "user-desktop",
         "Id": "com.github.tilorenz.compact_pager",
         "License": "GPL-3.0+",
@@ -94,6 +94,8 @@
         "Website": "https://github.com/tilorenz/compact_pager"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
+	"X-Plasma-NotificationArea": "true",
+	"X-Plasma-NotificationAreaCategory": "SystemServices",
     "X-Plasma-Provides": [
         "org.kde.plasma.virtualdesktops"
     ]
