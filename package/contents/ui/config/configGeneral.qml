@@ -29,6 +29,7 @@ KCM.SimpleKCM {
 
 	property alias cfg_forceLayout: pagerLayout.currentIndex
 	property alias cfg_enableScrolling: enableScrolling.checked
+	property alias cfg_invertScrollDirection: invertScrollDirection.checked
 	property alias cfg_wrapPage: wrapPage.checked
 	property alias cfg_currentDesktopSelected: currentDesktopSelectedBox.currentIndex
 	property alias cfg_actionOnCompactLayout: actionOnCompactLayout.checked
@@ -50,6 +51,11 @@ KCM.SimpleKCM {
 		QtControls.CheckBox {
 			id: enableScrolling
 			text: i18n("Enable scrolling to change the active desktop")
+		}
+
+		QtControls.CheckBox {
+			id: invertScrollDirection
+			text: i18n("Invert scroll direction")
 		}
 
 		QtControls.CheckBox {

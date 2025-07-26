@@ -75,6 +75,10 @@ PlasmoidItem {
 			increment--;
 		}
 
+		if (plasmoid.configuration.invertScrollDirection) {
+			increment = -increment;
+		}
+
 		while (increment !== 0) {
 			if (increment < 0) {
 				var nextPage = plasmoid.configuration.wrapPage ?
