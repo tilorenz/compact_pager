@@ -55,7 +55,7 @@ PlasmoidItem {
 	}
 
 	function runOverview() {
-		executable.exec('qdbus org.kde.kglobalaccel /component/kwin invokeShortcut Overview')
+		executable.exec('qdbus6 org.kde.kglobalaccel /component/kwin invokeShortcut Overview')
 	}
 
 	function switchDesktop(wheel) {
