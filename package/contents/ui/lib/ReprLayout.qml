@@ -175,10 +175,7 @@ GridLayout {
 								case 0: // do nothing
 									break;
 								case 1: // show desktop
-								 	// TODO why doesn't this work?
-									// also tried `dbus-send --dest=org.kde.kglobalaccel /KWin org.kde.KWin.showDesktop boolean:true`,
-									// doesn't work either
-									executable.exec(`qdbus6 org.kde.kglobalaccel /KWin showDesktop true`)
+									showDesktop()
 									break;
 								case 2:
 									runOverview()
@@ -189,7 +186,7 @@ GridLayout {
 							root.expanded = !root.expanded
 						}
 					} else {
-						executable.exec(`qdbus6 org.kde.kglobalaccel /KWin setCurrentDesktop ${index + 1}`)
+						setCurrentDesktop(index + 1)
 						root.expanded = false
 					}
 				}

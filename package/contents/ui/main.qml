@@ -26,7 +26,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
 import org.kde.kirigami as Kirigami
-
+import org.kde.plasma.workspace.dbus as DBus
 import org.kde.taskmanager
 import org.kde.kcmutils as KCM
 import org.kde.config as KConfig
@@ -42,15 +42,33 @@ PlasmoidItem {
 
 	function action_addDesktop() {
 		let desktopCount = pagerModel.numberOfDesktops
-		// if there are 3 desktops, create the new one at the end with name "Desktop 4"
-		executable.exec(`qdbus6 org.kde.kglobalaccel /VirtualDesktopManager createDesktop ${desktopCount} "Desktop ${desktopCount + 1}"`)
+		DBus.SessionBus.asyncCall({
+			"service": "org.kde.kglobalaccel",
+			"path": "/VirtualDesktopManager",
+			"iface": "org.kde.KWin.VirtualDesktopManager",
+			"member": "createDesktop",
+			"arguments": [
+				// if there are 3 desktops, create the new one at the end with name "Desktop 4"
+				new DBus.uint32(desktopCount),
+				new DBus.string("New Desktop")
+			],
+		})
 	}
 
 	function action_removeDesktop() {
 		// TODO pretty sure this has always worked by removing the last desktop, but we probably should make the
 		// context menu aware of which one was clicked (at least in full representation) and remove that one?
 		let lastDesktopId = pagerModel.desktopIds[pagerModel.numberOfDesktops - 1]
-		executable.exec(`qdbus6 org.kde.kglobalaccel /VirtualDesktopManager removeDesktop ${lastDesktopId}`)
+		DBus.SessionBus.asyncCall({
+			"service": "org.kde.kglobalaccel",
+			"path": "/VirtualDesktopManager",
+			"iface": "org.kde.KWin.VirtualDesktopManager",
+			"member": "removeDesktop",
+			"arguments": [
+				// This might not work under X11, as desktop IDs are unit there
+				new DBus.string(lastDesktopId)
+			],
+		})
 	}
 
 	function action_openKCM() {
@@ -58,7 +76,60 @@ PlasmoidItem {
 	}
 
 	function runOverview() {
-		executable.exec('qdbus6 org.kde.kglobalaccel /component/kwin invokeShortcut Overview')
+		DBus.SessionBus.asyncCall({
+			"service": "org.kde.kglobalaccel",
+			"path": "/component/kwin",
+			"iface": "org.kde.kglobalaccel.Component",
+			"member": "invokeShortcut",
+			"arguments": [
+				new DBus.string("Overview")
+			],
+		})
+	}
+
+	function showDesktop() {
+		// using the shortcut rather than the method of kwin itself as this has no argument and
+		// always toggles the effect
+		DBus.SessionBus.asyncCall({
+			"service": "org.kde.kglobalaccel",
+			"path": "/component/kwin",
+			"iface": "org.kde.kglobalaccel.Component",
+			"member": "invokeShortcut",
+			"arguments": [
+				new DBus.string("Show Desktop")
+			],
+		})
+	}
+
+	// index is 1-based, like in the DBus method
+	function setCurrentDesktop(index) {
+		DBus.SessionBus.asyncCall({
+			"service": "org.kde.KWin",
+			"path": "/KWin",
+			"iface": "org.kde.KWin",
+			"member": "setCurrentDesktop",
+			"arguments": [
+				new DBus.int32(index)
+			],
+		})
+	}
+
+	function nextDesktop() {
+		DBus.SessionBus.asyncCall({
+			"service": "org.kde.kglobalaccel",
+			"path": "/KWin",
+			"iface": "org.kde.KWin",
+			"member": "nextDesktop",
+		})
+	}
+
+	function previousDesktop() {
+		DBus.SessionBus.asyncCall({
+			"service": "org.kde.kglobalaccel",
+			"path": "/KWin",
+			"iface": "org.kde.KWin",
+			"member": "previousDesktop",
+		})
 	}
 
 	function switchDesktop(wheel) {
@@ -88,11 +159,11 @@ PlasmoidItem {
 		while (increment !== 0) {
 			if (increment < 0) {
 				if (plasmoid.configuration.wrapPage || !isOnLastDesktop) {
-					executable.exec(`qdbus6 org.kde.kglobalaccel /KWin nextDesktop`)
+					nextDesktop()
 				}
 			} else {
 				if (plasmoid.configuration.wrapPage || !isOnFirstDesktop) {
-					executable.exec(`qdbus6 org.kde.kglobalaccel /KWin previousDesktop`)
+					previousDesktop()
 				}
 			}
 
@@ -117,19 +188,6 @@ PlasmoidItem {
 
 	VirtualDesktopInfo {
 		id: pagerModel
-	}
-
-	Plasma5Support.DataSource {
-		id: executable
-		engine: "executable"
-		connectedSources: []
-		onNewData: function(source, data) {
-			disconnectSource(source)
-		}
-
-		function exec(cmd) {
-			executable.connectSource(cmd)
-		}
 	}
 
     Plasmoid.contextualActions: [
