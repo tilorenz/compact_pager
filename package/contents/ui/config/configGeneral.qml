@@ -43,6 +43,14 @@ KCM.SimpleKCM {
 	Kirigami.FormLayout {
 		id: layoutGeneral
 
+		QtControls.Label {
+			text: "Note: Functionality relating to windows, like showing app icons or hiding empty desktops, is currently broken. Sorry :("
+			font.bold: true
+			wrapMode: Text.Wrap
+			anchors.right: parent.right
+			anchors.left: parent.left
+		}
+
 		//anchors.fill: parent
 
 		QtControls.CheckBox {
