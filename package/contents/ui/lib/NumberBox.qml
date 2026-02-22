@@ -23,7 +23,6 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.private.pager
 
 Rectangle {
 	id: numberBox

@@ -23,7 +23,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.private.pager
+import org.kde.taskmanager
 import org.kde.draganddrop as DnD
 
 
@@ -60,13 +60,13 @@ GridLayout {
 	)
 
 	function modelColumns() {
-		return Math.ceil(pagerModel.count / pagerModel.layoutRows)
+		return Math.ceil(pagerModel.numberOfDesktops / pagerModel.desktopLayoutRows)
 	}
 
 	// if we have the space to lay the desktops out like the model says
 	function properLayoutFits(cols) {
 		let wantedWidth = 20 * cols
-		let wantedHeight = 20 * pagerModel.layoutRows
+		let wantedHeight = 20 * pagerModel.desktopLayoutRows
 		return width >= wantedWidth && height >= wantedHeight
 	}
 
@@ -96,8 +96,8 @@ GridLayout {
 			// since the plasmoid can scale in those directions
 			case 2: { // horizontal
 				let availableRows = Math.floor(height / 20)
-				let targetRows = Math.max(Math.min(availableRows, pagerModel.layoutRows), 1)
-				return Math.ceil(pagerModel.count / targetRows)
+				let targetRows = Math.max(Math.min(availableRows, pagerModel.desktopLayoutRows), 1)
+				return Math.ceil(pagerModel.numberOfDesktops / targetRows)
 			}
 			case 3: { // vertical
 				let availableColumns = Math.floor(width / 20)
@@ -110,17 +110,19 @@ GridLayout {
 
 	Repeater {
 		id: dRep
-		model: pagerModel
+		model: pagerModel.numberOfDesktops
 
 		NumberBox {
 			id: nBox
-			visible: index === pagerModel.currentPage
+
+			property bool isCurrentDesktop:  pagerModel.currentDesktop === pagerModel.desktopIds[index]
+			visible: isCurrentDesktop
 				|| (
 					reprLayout.shouldShowFullLayout
-					&& (proxyRepeater.count > 0 || !plasmoid.configuration.hideDesktopsWithoutWindows)
+					// && (proxyRepeater.count > 0 || !plasmoid.configuration.hideDesktopsWithoutWindows)
 				)
-			// TODO fix in plasma
-			text: (plasmoid.configuration.showDesktopNames && model.display != "") ? model.display : index + 1
+
+			text: plasmoid.configuration.showDesktopNames ? pagerModel.desktopNames[index] : index + 1
 
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
@@ -152,20 +154,20 @@ GridLayout {
 				preventStealing: true
 
 				onDrop: event => {
-							pagerModel.drop(event.mimeData, event.modifiers, model.TasksModel.virtualDesktop);
+							// pagerModel.drop(event.mimeData, event.modifiers, model.TasksModel.virtualDesktop);
 						}
 			}
 
 			//highlight the current desktop
-			color: index === pagerModel.currentPage ? bgColorHighlight :
+			color: isCurrentDesktop ? bgColorHighlight :
 				((proxyRepeater.count > 0) ? bgColor : bgColorWithoutWindows)
-			border.color: index === pagerModel.currentPage ? borderColorHighlight : borderColor
+			border.color: isCurrentDesktop ? borderColorHighlight : borderColor
 
 			MouseArea {
 				anchors.fill: parent
 				onClicked: {
 					// when clicking on the desktop we're already on
-					if (model.index === pagerModel.currentPage) {
+					if (isCurrentDesktop) {
 						// ...and we're in full layout or configured to do an action in compact layout...
 						if (reprLayout.shouldShowFullLayout || plasmoid.configuration.actionOnCompactLayout) {
 							// do some action
@@ -173,7 +175,10 @@ GridLayout {
 								case 0: // do nothing
 									break;
 								case 1: // show desktop
-									pagerModel.changePage(pagerModel.currentPage)
+								 	// TODO why doesn't this work?
+									// also tried `dbus-send --dest=org.kde.kglobalaccel /KWin org.kde.KWin.showDesktop boolean:true`,
+									// doesn't work either
+									executable.exec(`qdbus6 org.kde.kglobalaccel /KWin showDesktop true`)
 									break;
 								case 2:
 									runOverview()
@@ -184,7 +189,7 @@ GridLayout {
 							root.expanded = !root.expanded
 						}
 					} else {
-						pagerModel.changePage(model.index)
+						executable.exec(`qdbus6 org.kde.kglobalaccel /KWin setCurrentDesktop ${index + 1}`)
 						root.expanded = false
 					}
 				}

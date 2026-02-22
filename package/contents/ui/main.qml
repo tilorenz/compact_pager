@@ -27,7 +27,7 @@ import org.kde.plasma.components as PlasmaComponents
 import org.kde.kquickcontrolsaddons as KQuickControlsAddonsComponents
 import org.kde.kirigami as Kirigami
 
-import org.kde.plasma.private.pager
+import org.kde.taskmanager
 import org.kde.kcmutils as KCM
 import org.kde.config as KConfig
 
@@ -38,16 +38,19 @@ import "./lib"
 PlasmoidItem {
 	id: root
 
-	Plasmoid.status: (pagerModel.shouldShowPager || plasmoid.configuration.stayVisible) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
-
 	property int wheelDelta: 0
 
 	function action_addDesktop() {
-		pagerModel.addDesktop();
+		let desktopCount = pagerModel.numberOfDesktops
+		// if there are 3 desktops, create the new one at the end with name "Desktop 4"
+		executable.exec(`qdbus6 org.kde.kglobalaccel /VirtualDesktopManager createDesktop ${desktopCount} "Desktop ${desktopCount + 1}"`)
 	}
 
 	function action_removeDesktop() {
-		pagerModel.removeDesktop();
+		// TODO pretty sure this has always worked by removing the last desktop, but we probably should make the
+		// context menu aware of which one was clicked (at least in full representation) and remove that one?
+		let lastDesktopId = pagerModel.desktopIds[pagerModel.numberOfDesktops - 1]
+		executable.exec(`qdbus6 org.kde.kglobalaccel /VirtualDesktopManager removeDesktop ${lastDesktopId}`)
 	}
 
 	function action_openKCM() {
@@ -79,19 +82,18 @@ PlasmoidItem {
 			increment = -increment;
 		}
 
+		let isOnFirstDesktop = pagerModel.currentDesktop === pagerModel.desktopIds[0]
+		let isOnLastDesktop = pagerModel.currentDesktop === pagerModel.desktopIds[pagerModel.numberOfDesktops - 1]
+
 		while (increment !== 0) {
 			if (increment < 0) {
-				var nextPage = plasmoid.configuration.wrapPage ?
-									(pagerModel.currentPage + 1) % pagerModel.count :
-									Math.min(pagerModel.currentPage + 1, pagerModel.count - 1);
-				if(nextPage !== pagerModel.currentPage)
-					pagerModel.changePage(nextPage);
+				if (plasmoid.configuration.wrapPage || !isOnLastDesktop) {
+					executable.exec(`qdbus6 org.kde.kglobalaccel /KWin nextDesktop`)
+				}
 			} else {
-				var previousPage = plasmoid.configuration.wrapPage ?
-										(pagerModel.count + pagerModel.currentPage - 1) % pagerModel.count :
-										Math.max(pagerModel.currentPage - 1, 0);
-				if(previousPage !== pagerModel.currentPage)
-					pagerModel.changePage(previousPage);
+				if (plasmoid.configuration.wrapPage || !isOnFirstDesktop) {
+					executable.exec(`qdbus6 org.kde.kglobalaccel /KWin previousDesktop`)
+				}
 			}
 
 			increment += (increment < 0) ? 1 : -1;
@@ -113,17 +115,8 @@ PlasmoidItem {
 		isFullRep: true
 	}
 
-	PagerModel {
+	VirtualDesktopInfo {
 		id: pagerModel
-
-		enabled: root.visible
-
-		showDesktop: (plasmoid.configuration.currentDesktopSelected === 1)
-
-		showOnlyCurrentScreen: plasmoid.configuration.showOnlyCurrentScreen
-		screenGeometry: root.screenGeometry
-
-		pagerType: PagerModel.VirtualDesktops
 	}
 
 	Plasma5Support.DataSource {
@@ -144,16 +137,16 @@ PlasmoidItem {
             text: "Add Virtual Desktop"
             icon.name: "list-add"
             visible: KConfig.KAuthorized.authorize("kcm_kwin_virtualdesktops")
-            onTriggered: pagerModel.addDesktop()
+            onTriggered: action_addDesktop()
         },
         PlasmaCore.Action {
             text: "Remove Virtual Desktop"
             icon.name: "list-remove"
             visible: KConfig.KAuthorized.authorize("kcm_kwin_virtualdesktops")
 			enabled: Qt.binding(function() {
-				return pagerModel.count > 1;
+				return pagerModel.numberOfDesktops > 1;
 			});
-            onTriggered: pagerModel.removeDesktop()
+            onTriggered: action_removeDesktop()
         },
         PlasmaCore.Action {
             text: "Configure Virtual Desktops…"
