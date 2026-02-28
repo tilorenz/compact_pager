@@ -131,6 +131,7 @@ GridLayout {
 				id: tasksModel
 				filterByVirtualDesktop: true
 				virtualDesktop: desktopId
+				groupMode: TasksModel.GroupDisabled
 				// TODO I think we can also get the screen geometry from plasmoid?
 			}
 
@@ -143,8 +144,14 @@ GridLayout {
 				preventStealing: true
 
 				onDrop: event => {
-							// pagerModel.drop(event.mimeData, event.modifiers, model.TasksModel.virtualDesktop);
+					let md = event.mimeData
+					for (let format of md.formats) {
+						if (format.startsWith("windowsystem/winid+{")) {
+							// console.log("moving window", md.getDataAsByteArray(format), "to desktop", index + 1, "/desktopId", desktopId)
+							modevWindowToDesktop(md.getDataAsByteArray(format), desktopId)
 						}
+					}
+				}
 			}
 
 			//highlight the current desktop
