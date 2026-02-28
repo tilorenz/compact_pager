@@ -31,7 +31,6 @@ Rectangle {
 	property color fontColor: plasmoid.configuration.fontColorChecked ? 
 			plasmoid.configuration.fontColor : Kirigami.Theme.textColor
 	property bool showWindowIndicator: true
-	property list<var> iconSources: []
 
 	border.width: plasmoid.configuration.displayBorder ? plasmoid.configuration.borderThickness : 0
 	radius: height > width ? height * (plasmoid.configuration.borderRadius / 100) : width * (plasmoid.configuration.borderRadius / 100)
@@ -101,7 +100,7 @@ Rectangle {
 
 		readonly property int maxIconCount: Math.floor(Math.max(numberBox.height, numberBox.width) / iconSize)
 		readonly property bool showIconsInColumn: numberBox.height > numberBox.width
-		readonly property bool showAllIcons: numberBox.iconSources.length <= maxIconCount
+		readonly property bool showAllIcons: tasksModel.count <= maxIconCount
 		readonly property int iconSize: Math.min(numberBox.height * 0.7, numberBox.width * 0.7)
 
 		columns: (showIconsInColumn || !showAllIcons) ? 1 : maxIconCount
@@ -115,10 +114,10 @@ Rectangle {
 		}
 
 		Repeater {
-			model: numberBox.iconSources
+			model: tasksModel
 			BoxIcon {
 				visible: iconGrid.showAllIcons
-				source: modelData
+				source: model.decoration
 			}
 		}
 

@@ -115,37 +115,26 @@ GridLayout {
 		NumberBox {
 			id: nBox
 
-			property bool isCurrentDesktop:  pagerModel.currentDesktop === pagerModel.desktopIds[index]
+			property var desktopId: pagerModel.desktopIds[index]
+			property bool isCurrentDesktop:  pagerModel.currentDesktop === desktopId
 			visible: isCurrentDesktop
 				|| (
 					reprLayout.shouldShowFullLayout
-					// && (proxyRepeater.count > 0 || !plasmoid.configuration.hideDesktopsWithoutWindows)
+					&& (tasksModel.count > 0 || !plasmoid.configuration.hideDesktopsWithoutWindows)
 				)
 
 			text: plasmoid.configuration.showDesktopNames ? pagerModel.desktopNames[index] : index + 1
 
 			Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
-			// this is horrible, is there really no other way to do this in qml???
-			Repeater {
-				id: proxyRepeater
-				model: TasksModel
-				Item {
-					visible: false
-					property var iconSource: model.decoration
-				}
+			TasksModel {
+				id: tasksModel
+				filterByVirtualDesktop: true
+				virtualDesktop: desktopId
+				// TODO I think we can also get the screen geometry from plasmoid?
 			}
 
-			showWindowIndicator: plasmoid.configuration.showWindowIndicator && proxyRepeater.count > 0
-
-			iconSources: {
-				const result = [];
-				for (let i = 0; i < proxyRepeater.count; i++) {
-					const taskProxy = proxyRepeater.itemAt(i);
-					result.push(taskProxy.iconSource);
-				}
-				return result;
-			}
+			showWindowIndicator: plasmoid.configuration.showWindowIndicator && tasksModel.count > 0
 
 			DnD.DropArea {
 				id: droparea
@@ -160,7 +149,7 @@ GridLayout {
 
 			//highlight the current desktop
 			color: isCurrentDesktop ? bgColorHighlight :
-				((proxyRepeater.count > 0) ? bgColor : bgColorWithoutWindows)
+				((tasksModel.count > 0) ? bgColor : bgColorWithoutWindows)
 			border.color: isCurrentDesktop ? borderColorHighlight : borderColor
 
 			MouseArea {
