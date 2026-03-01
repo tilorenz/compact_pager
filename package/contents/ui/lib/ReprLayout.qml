@@ -132,7 +132,8 @@ GridLayout {
 				filterByVirtualDesktop: true
 				virtualDesktop: desktopId
 				groupMode: TasksModel.GroupDisabled
-				// TODO I think we can also get the screen geometry from plasmoid?
+				screenGeometry: root.screenGeometry
+				filterByScreen: plasmoid.configuration.showOnlyCurrentScreen
 			}
 
 			showWindowIndicator: plasmoid.configuration.showWindowIndicator && tasksModel.count > 0
