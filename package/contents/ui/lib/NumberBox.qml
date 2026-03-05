@@ -98,13 +98,14 @@ Rectangle {
 		anchors.centerIn: parent
 		visible: plasmoid.configuration.showWindowIcons
 
-		readonly property int maxIconCount: Math.floor(Math.max(numberBox.height, numberBox.width) / iconSize)
 		readonly property bool showIconsInColumn: numberBox.height > numberBox.width
-		readonly property bool showAllIcons: tasksModel.count <= maxIconCount
-		readonly property int iconSize: Math.min(numberBox.height * 0.7, numberBox.width * 0.7)
+		readonly property bool showAllIcons: iconSize > 6
+		readonly property int shorterSide: Math.min(numberBox.height, numberBox.width)
+		readonly property int longerSide: Math.max(numberBox.height, numberBox.width)
+		readonly property int iconSize: Math.min(shorterSide * 0.8, (longerSide - 4) / tasksModel.count)
 
-		columns: (showIconsInColumn || !showAllIcons) ? 1 : maxIconCount
-		rows: (showIconsInColumn && showAllIcons) ? maxIconCount : 1
+		columns: (showIconsInColumn || !showAllIcons) ? 1 : tasksModel.count
+		rows: (showIconsInColumn && showAllIcons) ? tasksModel.count : 1
 		flow: showIconsInColumn ? Grid.TopToBottom : Grid.LeftToRight
 
 		component BoxIcon: Kirigami.Icon {
