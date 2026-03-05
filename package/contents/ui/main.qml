@@ -190,6 +190,10 @@ PlasmoidItem {
 		id: pagerModel
 	}
 
+	ActivityInfo {
+		id: activityModel
+	}
+
 	TasksModel {
 		id: mainTasksModel
 		filterByVirtualDesktop: false

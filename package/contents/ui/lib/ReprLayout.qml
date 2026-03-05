@@ -134,6 +134,8 @@ GridLayout {
 				groupMode: TasksModel.GroupDisabled
 				screenGeometry: root.screenGeometry
 				filterByScreen: plasmoid.configuration.showOnlyCurrentScreen
+				filterByActivity: true
+				activity: activityModel.currentActivity
 			}
 
 			showWindowIndicator: plasmoid.configuration.showWindowIndicator && tasksModel.count > 0
