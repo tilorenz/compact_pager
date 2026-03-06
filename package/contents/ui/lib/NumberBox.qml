@@ -1,5 +1,5 @@
 /*
- * Copyright 2021  Tino Lorenz <tilrnz@gmx.net>
+ * Copyright 2021-2026  Tino Lorenz <tilrnz@gmx.net>
  * Copyright 2022  Diego Miguel <hello@diegomiguel.me>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -122,7 +122,10 @@ Rectangle {
 			}
 		}
 
-		BoxIcon {
+		Kirigami.Icon {
+			height: iconGrid.shorterSide * 0.7
+			width: iconGrid.shorterSide * 0.7
+			roundToIconSize: false
 			visible: !iconGrid.showAllIcons
 			source: iconGrid.showIconsInColumn ? "view-more-symbolic" : "view-more-horizontal-symbolic"
 		}
