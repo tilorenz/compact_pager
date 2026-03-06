@@ -240,13 +240,13 @@ PlasmoidItem {
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
-            text: "Add Virtual Desktop"
+            text: i18n("Add Virtual Desktop")
             icon.name: "list-add"
             visible: KConfig.KAuthorized.authorize("kcm_kwin_virtualdesktops")
             onTriggered: action_addDesktop()
         },
         PlasmaCore.Action {
-            text: "Remove Virtual Desktop"
+            text: i18n("Remove Virtual Desktop")
             icon.name: "list-remove"
             visible: KConfig.KAuthorized.authorize("kcm_kwin_virtualdesktops")
 			enabled: Qt.binding(function() {
@@ -255,7 +255,7 @@ PlasmoidItem {
             onTriggered: action_removeDesktop()
         },
         PlasmaCore.Action {
-            text: "Configure Virtual Desktops…"
+            text: i18n("Configure Virtual Desktops…")
             visible: KConfig.KAuthorized.authorize("kcm_kwin_virtualdesktops")
             onTriggered: KCM.KCMLauncher.openSystemSettings("kcm_kwin_virtualdesktops")
         }
