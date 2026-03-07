@@ -125,9 +125,7 @@ KCM.SimpleKCM {
 				icon.name: "dialog-information"
 				QtControls.ToolTip.visible: hovered
 				QtControls.ToolTip.text: i18n(
-					"<b>Adaptive</b>:<br>Switch the layout depending on available space.<br><br>" +
-					"<b>Full</b>:<br>Always show full layout.<br><br>" +
-					"<b>Compact</b>:<br>Always show compact layout."
+					"<b>Adaptive</b>:<br>Switch the layout depending on available space.<br><br><b>Full</b>:<br>Always show full layout.<br><br><b>Compact</b>:<br>Always show compact layout."
 				)
 			}
 		}
