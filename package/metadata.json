@@ -92,7 +92,7 @@
 		"Name": "Compact Pager",
 		"Name[de]": "Compact Pager",
 		"Name[fr]": "Compact Pager",
-		"Version": "3.10",
+		"Version": "3.11",
 		"Website": "https://github.com/tilorenz/compact_pager"
 	},
 	"X-Plasma-API-Minimum-Version": "6.0",
