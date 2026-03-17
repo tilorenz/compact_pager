@@ -30,7 +30,7 @@
 		"Description[et]": "Lülitumine virtuaalsete töölaudade vahel",
 		"Description[eu]": "Aldatu alegiazko mahaigain batetik bestera",
 		"Description[fi]": "Vaihda virtuaalityöpöytää",
-		"Description[fr]": "Passe d'un bureau virtuel à l'autre",
+		"Description[fr]": "Basculer entre les bureaux virtuels",
 		"Description[fy]": "Wikselje tusken firuele buroblêden",
 		"Description[ga]": "Athraigh an deasc fhíorúil",
 		"Description[gl]": "Cambia entre escritorios virtuais",
@@ -91,6 +91,7 @@
 		"License": "GPL-3.0+",
 		"Name": "Compact Pager",
 		"Name[de]": "Compact Pager",
+		"Name[fr]": "Compact Pager",
 		"Version": "3.10",
 		"Website": "https://github.com/tilorenz/compact_pager"
 	},

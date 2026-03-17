@@ -1,0 +1,222 @@
+# Translation of compact_pager in fr
+# Copyright (C) 2026
+# This file is distributed under the same license as the compact_pager package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: compact_pager\n"
+"Report-Msgid-Bugs-To: https://github.com/tilorenz/compact_pager\n"
+"POT-Creation-Date: 2026-03-07 14:31+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: M0lyk <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../package/metadata.json
+msgid "Compact Pager"
+msgstr "Compact Pager"
+
+#: ../package/metadata.json
+msgid "Switch between virtual desktops"
+msgstr "Basculer entre les bureaux virtuels"
+
+#: ../package/contents/config/config.qml
+msgid "General"
+msgstr "Général"
+
+#: ../package/contents/config/config.qml
+msgid "Appearance"
+msgstr "Apparence"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Default"
+msgstr "Par défaut"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Font"
+msgstr "Police"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Font style:"
+msgstr "Style de police :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Bold text"
+msgstr "Texte en gras"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Italic text"
+msgstr "Texte en italique"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed font size:"
+msgstr "Taille de police fixe :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed font color:"
+msgstr "Couleur de police fixe :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Font color:"
+msgstr "Couleur de police :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Border"
+msgstr "Bordure"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Show border:"
+msgstr "Afficher la bordure :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Border color:"
+msgstr "Couleur de bordure :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Same as font"
+msgstr "Identique au texte"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Border thickness:"
+msgstr "Épaisseur de la bordure :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Border radius (%):"
+msgstr "Rayon de la bordure (%) :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Background"
+msgstr "Arrière-plan"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed active background color:"
+msgstr "Couleur d'arrière-plan actif fixe :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed inactive background color:"
+msgstr "Couleur d'arrière-plan inactif fixe :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed inactive background color without windows:"
+msgstr "Couleur d'arrière-plan inactif fixe sans fenêtres :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Window Indicator"
+msgstr "Indicateur de fenêtre"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Show window indicator:"
+msgstr "Afficher l'indicateur de fenêtre :"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Window indicator border radius (%):"
+msgstr "Rayon de bordure de l'indicateur de fenêtre (%) :"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Stay visible when there is only one virtual desktop"
+msgstr "Rester visible lorsqu'il n'y a qu'un seul bureau virtuel"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Enable dropping apps to move"
+msgstr "Permettre le glisser-déposer d'applications pour les déplacer"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Enable drag-and-dropping apps from the task manager to move them to other desktops"
+msgstr "Permettre le glisser-déposer d'applications depuis le gestionnaire de tâches vers d'autres bureaux"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Enable scrolling to change the active desktop"
+msgstr "Permettre le défilement pour changer de bureau actif"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Invert scroll direction"
+msgstr "Inverser le sens du défilement"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Navigation wraps around"
+msgstr "Navigation en boucle"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Only show windows from current Screen in pager"
+msgstr "Afficher uniquement les fenêtres de l'écran actuel dans le pagineur"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Hide desktops without any windows"
+msgstr "Masquer les bureaux sans fenêtres"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "What to show in box:"
+msgstr "Contenu de la case :"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Show desktop numbers"
+msgstr "Afficher les numéros de bureau"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Show desktop names"
+msgstr "Afficher les noms de bureau"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Show window icons"
+msgstr "Afficher les icônes de fenêtre"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Layout:"
+msgstr "Disposition :"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Adaptive"
+msgstr "Adaptatif"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Full"
+msgstr "Complet"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Compact"
+msgstr "Compacte"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "<b>Adaptive</b>:<br>Switch the layout depending on available space.<br><br><b>Full</b>:<br>Always show full layout.<br><br><b>Compact</b>:<br>Always show compact layout."
+msgstr "<b>Adaptatif</b> :<br>Bascule la disposition selon l'espace disponible.<br><br><b>Complet</b> :<br>Affiche toujours la disposition complète.<br><br><b>Compacte</b> :<br>Affiche toujours la disposition compacte."
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Selecting current virtual desktop:"
+msgstr "Sélection du bureau virtuel actuel :"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Does nothing"
+msgstr "Ne fait rien"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Shows the desktop"
+msgstr "Affiche le bureau"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Shows overview"
+msgstr "Affiche la vue d'ensemble"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid ""
+"Directly do selected action in compact layout\n"
+"instead of expanding full layout"
+msgstr ""
+"Effectuer directement l'action sélectionnée en disposition compacte\n"
+"au lieu de déployer la disposition complète"
+
+#: ../package/contents/ui/main.qml
+msgid "Add Virtual Desktop"
+msgstr "Ajouter un bureau virtuel"
+
+#: ../package/contents/ui/main.qml
+msgid "Remove Virtual Desktop"
+msgstr "Supprimer un bureau virtuel"
+
+#: ../package/contents/ui/main.qml
+msgid "Configure Virtual Desktops…"
+msgstr "Configurer les bureaux virtuels…"
