@@ -65,7 +65,7 @@
 		"Description[pt]": "Mudar de ecrã virtual",
 		"Description[pt_BR]": "Alterna entre áreas de trabalho virtuais",
 		"Description[ro]": "Comută între birouri virtuale",
-		"Description[ru]": "Переключение между рабочими столами",
+		"Description[ru]": "Компактное переключение рабочих столов",
 		"Description[si]": "අතත්‍ය වැඩතල අතර මාරුවන්න",
 		"Description[sk]": "Prepínanie medzi virtuálnymi plochami",
 		"Description[sl]": "Preklapljaj med navideznimi namizji",
@@ -92,6 +92,7 @@
 		"Name": "Compact Pager",
 		"Name[de]": "Compact Pager",
 		"Name[fr]": "Compact Pager",
+		"Name[ru]": "Compact Pager",
 		"Version": "3.11",
 		"Website": "https://github.com/tilorenz/compact_pager"
 	},
