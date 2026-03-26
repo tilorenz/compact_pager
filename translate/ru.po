@@ -1,0 +1,222 @@
+# Translation of compact_pager in Russian
+# Copyright (C) 2026
+# This file is distributed under the same license as the compact_pager package.
+# 1280px <megarainbow29@gmail.com>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: compact_pager\n"
+"Report-Msgid-Bugs-To: https://github.com/tilorenz/compact_pager\n"
+"POT-Creation-Date: 2026-03-07 14:31+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: 1280px <megarainbow29@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../package/metadata.json
+msgid "Compact Pager"
+msgstr "Compact Pager"
+
+#: ../package/metadata.json
+msgid "Switch between virtual desktops"
+msgstr "Компактное переключение рабочих столов"
+
+#: ../package/contents/config/config.qml
+msgid "General"
+msgstr "Общие"
+
+#: ../package/contents/config/config.qml
+msgid "Appearance"
+msgstr "Внешний вид"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Default"
+msgstr "По умолчанию"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Font"
+msgstr "Шрифт"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Font style:"
+msgstr "Стиль шрифта:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Bold text"
+msgstr "Жирный текст"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Italic text"
+msgstr "Курсивный текст"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed font size:"
+msgstr "Фиксированный размер шрифта:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed font color:"
+msgstr "Фиксированный цвет шрифта:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Font color:"
+msgstr "Цвет шрифта:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Border"
+msgstr "Границы"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Show border:"
+msgstr "Отображать границы:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Border color:"
+msgstr "Цвет границ:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Same as font"
+msgstr "Как у текста"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Border thickness:"
+msgstr "Толщина границ:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Border radius (%):"
+msgstr "Радиус скругления границ, %:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Background"
+msgstr "Фоновый цвет"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed active background color:"
+msgstr "Фиксированный цвет фона активных элементов:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed inactive background color:"
+msgstr "Фиксированный цвет фона неактивных элементов:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Fixed inactive background color without windows:"
+msgstr "Фиксированный цвет фона неактивных элементов без окон:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Window Indicator"
+msgstr "Индикатор окон"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Show window indicator:"
+msgstr "Отображать индикатор окон:"
+
+#: ../package/contents/ui/config/configAppearance.qml
+msgid "Window indicator border radius (%):"
+msgstr "Радиус скругления индикатора окон, %:"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Stay visible when there is only one virtual desktop"
+msgstr "Отображать, когда есть только один рабочий стол"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Enable dropping apps to move"
+msgstr "Включить перетаскивание приложений для перемещения"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Enable drag-and-dropping apps from the task manager to move them to other desktops"
+msgstr "Включить перетаскивание приложений с панели задач для их перемещения на другие рабочие столы"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Enable scrolling to change the active desktop"
+msgstr "Включить прокрутку для переключения активного рабочего стола"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Invert scroll direction"
+msgstr "Обратное направление прокрутки"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Navigation wraps around"
+msgstr "Прокрутка без остановки"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Only show windows from current Screen in pager"
+msgstr "Отображать только окна рабочих столов с этого экрана"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Hide desktops without any windows"
+msgstr "Скрывать рабочие столы без открытых окон"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "What to show in box:"
+msgstr "Отображать внутри элементов:"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Show desktop numbers"
+msgstr "Номера рабочих столов"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Show desktop names"
+msgstr "Названия рабочих столов"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Show window icons"
+msgstr "Значки окон"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Layout:"
+msgstr "Макет:"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Adaptive"
+msgstr "Адаптивный"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Full"
+msgstr "Полный"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Compact"
+msgstr "Компактный"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "<b>Adaptive</b>:<br>Switch the layout depending on available space.<br><br><b>Full</b>:<br>Always show full layout.<br><br><b>Compact</b>:<br>Always show compact layout."
+msgstr "<b>Адаптивный</b>:<br>Переключение макета в зависимости от доступного места.<br><br><b>Полный</b>:<br>Всегда отображать полный макет.<br><br><b>Компактный</b>:<br>Всегда отображать компактный макет."
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Selecting current virtual desktop:"
+msgstr "Выбор текущего рабочего стола:"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Does nothing"
+msgstr "Ничего не делает"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Shows the desktop"
+msgstr "Показывает рабочий стол"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid "Shows overview"
+msgstr "Открывает обзор окон"
+
+#: ../package/contents/ui/config/configGeneral.qml
+msgid ""
+"Directly do selected action in compact layout\n"
+"instead of expanding full layout"
+msgstr ""
+"В режиме компактного макета, выполнять установленное\n"
+"действие сразу же вместо открытия полного макета"
+
+#: ../package/contents/ui/main.qml
+msgid "Add Virtual Desktop"
+msgstr "Добавить рабочий стол"
+
+#: ../package/contents/ui/main.qml
+msgid "Remove Virtual Desktop"
+msgstr "Удалить рабочий стол"
+
+#: ../package/contents/ui/main.qml
+msgid "Configure Virtual Desktops…"
+msgstr "Настроить рабочие столы…"

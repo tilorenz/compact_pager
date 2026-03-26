@@ -7,6 +7,7 @@
 | Template |      50 |       |
 | de       |   50/50 |  100% |
 | fr       |   50/50 |  100% |
+| ru       |   50/50 |  100% |
 
 
 ## New Translations
