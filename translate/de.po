@@ -67,15 +67,15 @@ msgstr "Schriftfarbe"
 
 #: ../package/contents/ui/config/configAppearance.qml
 msgid "Border"
-msgstr "Rand"
+msgstr "Rahmen"
 
 #: ../package/contents/ui/config/configAppearance.qml
 msgid "Show border:"
-msgstr "Rand Anzeigen"
+msgstr "Rahmen Anzeigen"
 
 #: ../package/contents/ui/config/configAppearance.qml
 msgid "Border color:"
-msgstr "Randfarbe"
+msgstr "Rahmenfarbe"
 
 #: ../package/contents/ui/config/configAppearance.qml
 msgid "Same as font"
@@ -83,11 +83,11 @@ msgstr "wie Schrift"
 
 #: ../package/contents/ui/config/configAppearance.qml
 msgid "Border thickness:"
-msgstr "Randdicke"
+msgstr "Rahmendicke"
 
 #: ../package/contents/ui/config/configAppearance.qml
 msgid "Border radius (%):"
-msgstr "Randradius"
+msgstr "Rahmenradius"
 
 #: ../package/contents/ui/config/configAppearance.qml
 msgid "Background"
@@ -115,7 +115,7 @@ msgstr "Fensterindikator anzeigen"
 
 #: ../package/contents/ui/config/configAppearance.qml
 msgid "Window indicator border radius (%):"
-msgstr "Fensterindikator Randradius"
+msgstr "Fensterindikator Rahmenradius"
 
 #: ../package/contents/ui/config/configGeneral.qml
 msgid "Stay visible when there is only one virtual desktop"
