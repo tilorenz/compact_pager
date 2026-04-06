@@ -116,7 +116,7 @@ PlasmoidItem {
 
 	function nextDesktop() {
 		DBus.SessionBus.asyncCall({
-			"service": "org.kde.kglobalaccel",
+			"service": "org.kde.KWin",
 			"path": "/KWin",
 			"iface": "org.kde.KWin",
 			"member": "nextDesktop",
@@ -125,7 +125,7 @@ PlasmoidItem {
 
 	function previousDesktop() {
 		DBus.SessionBus.asyncCall({
-			"service": "org.kde.kglobalaccel",
+			"service": "org.kde.KWin",
 			"path": "/KWin",
 			"iface": "org.kde.KWin",
 			"member": "previousDesktop",
