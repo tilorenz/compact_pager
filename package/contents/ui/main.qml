@@ -153,8 +153,8 @@ PlasmoidItem {
 			increment = -increment;
 		}
 
-		let isOnFirstDesktop = pagerModel.currentDesktop === pagerModel.desktopIds[0]
-		let isOnLastDesktop = pagerModel.currentDesktop === pagerModel.desktopIds[pagerModel.numberOfDesktops - 1]
+		let isOnFirstDesktop = pagerModel.currentDesktopOnScreen === pagerModel.desktopIds[0]
+		let isOnLastDesktop = pagerModel.currentDesktopOnScreen === pagerModel.desktopIds[pagerModel.numberOfDesktops - 1]
 
 		while (increment !== 0) {
 			if (increment < 0) {
@@ -188,6 +188,13 @@ PlasmoidItem {
 
 	VirtualDesktopInfo {
 		id: pagerModel
+		property var currentDesktopOnScreen: currentDesktopByScreenName(root.Screen.name)
+
+		onCurrentDesktopForScreenChanged: (screenName) => {
+			if (root.Screen.name === screenName) {
+				currentDesktopOnScreen = currentDesktopByScreenName(root.Screen.name)
+			}
+		}
 	}
 
 	ActivityInfo {
