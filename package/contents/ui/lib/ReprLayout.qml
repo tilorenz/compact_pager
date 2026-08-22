@@ -116,7 +116,7 @@ GridLayout {
 			id: nBox
 
 			property var desktopId: pagerModel.desktopIds[index]
-			property bool isCurrentDesktop:  pagerModel.currentDesktop === desktopId
+			property bool isCurrentDesktop: pagerModel.currentDesktopOnScreen === desktopId
 			visible: isCurrentDesktop
 				|| (
 					reprLayout.shouldShowFullLayout
@@ -132,7 +132,7 @@ GridLayout {
 				filterByVirtualDesktop: true
 				virtualDesktop: desktopId
 				groupMode: TasksModel.GroupDisabled
-				screenGeometry: root.screenGeometry
+				screenGeometry: Plasmoid.containment.screenGeometry
 				filterByScreen: plasmoid.configuration.showOnlyCurrentScreen
 				filterByActivity: true
 				activity: activityModel.currentActivity
