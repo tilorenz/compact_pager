@@ -1,3 +1,1 @@
-rm package.plasmoid
-zip -r package.plasmoid package 
-
+python3 ./kpac build && mv compact_pager*.plasmoid package.plasmoid

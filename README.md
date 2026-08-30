@@ -24,6 +24,13 @@ To test your changes, you can use `plasmoidviewer`:
 
 `plasmoidviewer -a package`
 
+**kpac:**
+
+This repo comes with Zren's `kpac` script. It can build the translations with `kpac tr`
+and build the release package with `kpac build`.
+
+The `bundle.sh` script builds a release and renames it to `package.plasmoid`.
+
 ## Gallery
 ![GIF showing adaptive behaviour](https://user-images.githubusercontent.com/22967053/148304695-b4954033-d14d-4c28-a917-5ccf35785913.gif)
 ![Full representation in vertical panel](https://user-images.githubusercontent.com/22967053/148304504-111ef2e8-9db6-4649-974f-77ba37be59a9.png)
