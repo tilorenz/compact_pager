@@ -2,7 +2,7 @@
  * Copyright 2012  Luís Gabriel Lima <lampih@gmail.com>
  * Copyright 2016  Kai Uwe Broulik <kde@privat.broulik.de>
  * Copyright 2016  Eike Hein <hein@kde.org>
- * Copyright 2021  Tino Lorenz <tilrnz@gmx.net>
+ * Copyright 2021-2026  Tino Lorenz <tilrnz@gmx.net>
  * Copyright 2022  Diego Miguel <hello@diegomiguel.me>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -188,11 +188,16 @@ PlasmoidItem {
 
 	VirtualDesktopInfo {
 		id: pagerModel
-		property var currentDesktopOnScreen: currentDesktopByScreenName(root.Screen.name)
+		property var currentDesktopOnScreen: (typeof currentDesktopByScreenName === "function") ?
+			currentDesktopByScreenName(root.Screen.name) : currentDesktop
 
-		onCurrentDesktopForScreenChanged: (screenName) => {
-			if (root.Screen.name === screenName) {
-				currentDesktopOnScreen = currentDesktopByScreenName(root.Screen.name)
+		Component.onCompleted: {
+			if ("onCurrentDesktopForScreenChanged" in pagerModel) {
+				onCurrentDesktopForScreenChanged.connect((screenName) => {
+					if (root.Screen.name === screenName) {
+						currentDesktopOnScreen = currentDesktopByScreenName(root.Screen.name)
+					}
+				})
 			}
 		}
 	}
